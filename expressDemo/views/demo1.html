@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>UI组件之排序表格</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/Table.css">
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<form action="" method="POST">
+				<td><input type="text" name="name"></td>
+				<td><input type="text" name="Chinese" ></td>
+				<td><input type="text" name="math" ></td>
+				<td><input type="text" name="English"></td>
+				<td><input type="submit"></td>
+				</form>
+			</tr>
+			<tr>
+				<td>姓名</span></td>
+				<td>语文<span class="upBtn"></span><span class="downBtn"></td>
+				<td>数学<span class="upBtn"></span><span class="downBtn"></td>
+				<td>英语<span class="upBtn"></span><span class="downBtn"></td>
+				<td>总分<span class="upBtn"></span><span class="downBtn"></td>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+			for (let i of detial) {
+				%>
+			<tr>
+				<td><%= i.name %></td>
+				<td><%=i.Chinese %></td>
+				<td><%=i.math %></td>
+				<td><%=i.English %></td>
+				<td><%=i.total %></td>
+				<td><input type="button" value="删除" onclick="deletTr(this)" formaction="" formmethod="POST"/></td>
+				<td><input type="button" value="更改" onclick="change(this)"/></td>
+			</tr>
+			<%
+			}
+			%>
+		</tbody>
+	</table>
+	<div  id="change" class="change">
+		<div class="inside">
+			<div class="false" id="false">X</div>
+			<form action="demo1/change" method="POST">
+				<input type="text" placeholder="请输入您的名字" required name="name">
+				<input type="text" placeholder="请输入语文成绩" required name="Chinese">
+				<input type="text" placeholder="请输入数学成绩" required name="math">
+				<input type="text" placeholder="请输入英语成绩" required name="English">
+				<input type="submit" value="确定">
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript" src="javascripts/Table.js"></script>
+</body>
+</html>
