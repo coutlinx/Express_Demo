@@ -66,9 +66,10 @@ res.redirect('http://localhost:3000/demo1')
 })
 router.post('/search',(req,res) => {
     let name = req.body.name;
+    if (name)
     pattern(name);
     if (search.length == 0){
-    res.send('没有这个人哦')
+    res.send('<p \"style=color:red;\">这边找不到您要的'+name+"呢</P>");
     }else{
     res.render('search',{detial:search});
     search.splice(0,search.length);
@@ -77,10 +78,22 @@ router.post('/search',(req,res) => {
     
 })
 function pattern(name){
-    for (let i in studnet){
-        if (studnet[i].name.indexOf(name) >=0){
-            search.push(studnet[i]);
+    let num = /^[0-9]\d*$/
+    let character = /[\u4E00-\u9FA5]/
+    if (character.test(name)){
+        for (let i in studnet){
+            if (studnet[i].name.indexOf(name) >=0){
+                search.push(studnet[i]);
+            }
         }
+    }else if (num.test(name)){
+        for (let i in studnet){
+            if (studnet[i].Chinese == name || studnet[i].math == name || studnet[i].English == name || studnet[i].total == name ){
+                search.push(studnet[i]);
+            }
+        }
+    }else{
+        return
     }
 }
 module.exports = router;
