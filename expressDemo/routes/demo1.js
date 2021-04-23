@@ -13,13 +13,13 @@ fs.readFile(__dirname+"/bean/task.json",(err,date) =>{
          i.total = Number(i.math)+Number(i.English)+Number(i.Chinese)
         }
         studnet = date
-        
+       
     }
-router.get('/', function(req, res, next) {
-        res.render('demo1',{detial:studnet});
-    })
-  
 });
+router.get('/', function(req, res, next) {
+    res.render('demo1',{detial:studnet});
+    return
+})
 router.post("/",(req,res)=>{
     if (req.body.oldName!=undefined){
         console.log(req.body.oldName)
@@ -34,12 +34,14 @@ router.post("/",(req,res)=>{
 })
 router.post('/delet',(req,res)=>{
     console.log(req.body.name)
+    console.log(studnet)
     for (let i in studnet){
         if (studnet[i].name == req.body.name){
             studnet.splice(i,1);
             console.log(studnet)
+            res.redirect('http://localhost:3000/demo1')
+            return
         }
-        res.redirect('http://localhost:3000/demo1')
     }
 })
 router.post('/change',(req,res) => {
