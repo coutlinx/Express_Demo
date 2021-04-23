@@ -79,3 +79,20 @@ td {
 	position: absolute;
 	right: 5px;
   }
+  .search{
+	right:60px;
+	top:180px;
+	position: relative;
+	text-align: center;
+  }
+  .search input[type="text"]{	
+	  width: 600px;
+	  height: 40px;
+	  border-radius: 4px;
+	  outline: none;
+  }
+  .search input[type="submit"]{
+	  width: 50px;
+	  height: 40px;
+  }
+  

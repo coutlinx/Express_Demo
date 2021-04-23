@@ -1,8 +1,10 @@
+const { render } = require('ejs');
 var express = require('express');
 var router = express.Router();
 var fs = require('fs')
 var studnet; 
 var oldName;
+let search = [];
 fs.readFile(__dirname+"/bean/task.json",(err,date) =>{
     if (err){
         console.log(err);
@@ -62,4 +64,23 @@ router.post('/change',(req,res) => {
     console.log(studnet);
 res.redirect('http://localhost:3000/demo1')
 })
+router.post('/search',(req,res) => {
+    let name = req.body.name;
+    pattern(name);
+    if (search.length == 0){
+    res.send('没有这个人哦')
+    }else{
+    res.render('search',{detial:search});
+    search.splice(0,search.length);
+    }
+    
+    
+})
+function pattern(name){
+    for (let i in studnet){
+        if (studnet[i].name.indexOf(name) >=0){
+            search.push(studnet[i]);
+        }
+    }
+}
 module.exports = router;
