@@ -1,10 +1,13 @@
+const { SIGABRT } = require('constants');
 const { render } = require('ejs');
+const e = require('express');
 var express = require('express');
 var router = express.Router();
 var fs = require('fs')
 var studnet; 
 var oldName;
 let search = [];
+let element = 4;
 fs.readFile(__dirname+"/bean/task.json",(err,date) =>{
     if (err){
         console.log(err);
@@ -19,7 +22,10 @@ fs.readFile(__dirname+"/bean/task.json",(err,date) =>{
     }
 });
 router.get('/', function(req, res, next) {
-    res.render('demo1',{detial:studnet});
+    let NewStudent = studnet.slice(0,4);
+    res.render("demo1",{
+        detial:NewStudent
+    })
     return
 })
 router.post("/",(req,res)=>{
@@ -76,6 +82,26 @@ router.post('/search',(req,res) => {
     }
     
     
+})
+router.post('/nextPage',(req,res)=>{
+    if(element+8 >= studnet.length){
+        res.json(studnet.slice(element));
+    }else{
+    let Newstudent = studnet.slice(element+4,4);
+    element+=4;
+    res.json(Newstudent);
+    }
+        
+    
+});
+router.post('/lastPage',(req,res) => {
+    if(element-8<0){
+        res.json(studnet.slice(0,4));
+    }else{
+        let Newstudent = studnet.slice(element-8,4);
+        element-=4;
+    res.json(Newstudent);
+    }
 })
 function pattern(name){
     let num = /^[0-9]\d*$/

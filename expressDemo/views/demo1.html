@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>UI组件之排序表格</title>
 	<link rel="stylesheet" type="text/css" href="stylesheets/Table.css">
+	<script src="/javascripts/jquery.js"></script>
 </head>
 <body>
 	<div class="search">
@@ -32,7 +33,7 @@
 				<td>总分<span class="upBtn"></span><span class="downBtn"></td>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="Change">
 			<%
 			for (let i of detial) {
 				%>
@@ -49,6 +50,12 @@
 			}
 			%>
 		</tbody>
+		<tfoot>
+			<td colspan="6"> 
+				<input 	type="button" value="下一页" id="nextPage"> 
+				<input 	type="button" value="上一页" id="lastPage"> 
+			</td>
+		</tfoot>
 	</table>
 	<div  id="change" class="change">
 		<div class="inside">
@@ -63,5 +70,44 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="javascripts/Table.js"></script>
+	<script>
+		$("#nextPage").click(function(){
+			$.ajax({
+				type:"post",
+				url:"http://localhost:3000/demo1/nextPage",
+				success:function(data){
+					console.log(data);
+				document.getElementById("Change").innerHTML = data.map(i=> 
+				`<tr>
+				<td>${i.name}</td>
+				<td>${i.Chinese}</td>
+				<td>${i.math}</td>
+				<td>${i.English}</td>
+				<td>${i.total}</td>
+				<td><input type="button" value="删除" onclick="deletTr(this)" formaction="" formmethod="POST"/></td>
+				<td><input type="button" value="更改" onclick="change(this)"/></td>
+			</tr>`).join("");
+				}
+			});
+		})
+		$("#lastPage").click(function(){
+			$.ajax({
+				type:"post",
+				url:"http://localhost:3000/demo1/lastPage",
+				success:function(data){
+				document.getElementById("Change").innerHTML = data.map(i=> 
+				`<tr>
+				<td>${i.name}</td>
+				<td>${i.Chinese}</td>
+				<td>${i.math}</td>
+				<td>${i.English}</td>
+				<td>${i.total}</td>
+				<td><input type="button" value="删除" onclick="deletTr(this)" formaction="" formmethod="POST"/></td>
+				<td><input type="button" value="更改" onclick="change(this)"/></td>
+			</tr>`).join("");
+				}
+			})
+		})
+	</script>
 </body>
 </html>
