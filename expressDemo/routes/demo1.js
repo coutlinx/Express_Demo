@@ -3,11 +3,14 @@ const { render } = require('ejs');
 const e = require('express');
 var express = require('express');
 var router = express.Router();
-var fs = require('fs')
+var fs = require('fs');
+const { normalize } = require('path');
 var studnet; 
 var oldName;
 let search = [];
 let element = 4;
+let Allpage;
+let Nowpage;
 fs.readFile(__dirname+"/bean/task.json",(err,date) =>{
     if (err){
         console.log(err);
@@ -23,8 +26,12 @@ fs.readFile(__dirname+"/bean/task.json",(err,date) =>{
 });
 router.get('/', function(req, res, next) {
     let NewStudent = studnet.slice(0,4);
+    Allpage = studnet.length/4;
+    Nowpage = 1;
     res.render("demo1",{
-        detial:NewStudent
+        detial:NewStudent,
+        Allpages:Allpage,
+        Nowpages:Nowpage
     })
     return
 })
@@ -83,24 +90,44 @@ router.post('/search',(req,res) => {
     
     
 })
-router.post('/nextPage',(req,res)=>{
-    if(element+8 >= studnet.length){
-        res.json(studnet.slice(element));
-    }else{
-    let Newstudent = studnet.slice(element+4,4);
-    element+=4;
-    res.json(Newstudent);
+router.post('/nextPage/:name',(req,res)=>{
+    for(i in studnet){
+        if (studnet[i].name.indexOf(req.params.name)>=0){
+            if (Number(i)+8>=studnet.length){
+                res.json(studnet.slice(i+4))
+            }else{
+                res.json(studnet.slice(i+4,4));
+            }
+            if (i==0){
+            Nowpage = i+1;
+            }else{
+            Nowpage = i%4+1;
+            }
+            return
+        }
     }
+   
+        
+
+
         
     
 });
-router.post('/lastPage',(req,res) => {
-    if(element-8<0){
-        res.json(studnet.slice(0,4));
-    }else{
-        let Newstudent = studnet.slice(element-8,4);
-        element-=4;
-    res.json(Newstudent);
+router.post('/lastPage/:name',(req,res) => {
+    for(i in studnet){
+        if (studnet[i].name.indexOf(req.params.name)>=0){
+            if(Number(i)-8<=0){
+                res.json(studnet.slice(0,4))
+            }else{
+            res.json(studnet.slice(i-4,4));
+            }
+            if (i==0){
+            Nowpage = i+1;
+            }else{
+            Nowpage = i%4+1;
+            }
+            return
+        }
     }
 })
 function pattern(name){
@@ -122,4 +149,15 @@ function pattern(name){
         return
     }
 }
+router.post('/page/:id',(req,res) => {
+        if (req.params.id * 4 >studnet.length||req.params.id=="1"){
+            let Newstudent = studnet.slice(req.params.id * 4-4,4);
+        res.json(Newstudent);
+        }else{
+            let Newstudent = studnet.slice(req.params.id * 4-4);
+                res.json(Newstudent);
+        }
+    
+})
+
 module.exports = router;
