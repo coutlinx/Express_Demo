@@ -10,7 +10,7 @@ router.post('/',(req,res)=>{
   let user = new creatUser(req.body.name,req.body.password,req.body.mobile);
   console.log(user);
 
-db.query("select name from user where name = "+ user.name,(err,results,fields) =>{
+db.query("select name from user where name = "+"\""+ user.name+"\"",(err,results,fields) =>{
   if (err!=null){
     console.log(err)
   }
