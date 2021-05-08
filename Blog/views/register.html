@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="/stylesheets/login.css">
 </head>
 <body>
+	
 	<!-- particles.js container -->
 	<div id="particles-js"></div>
 	<div id="wrapper">
@@ -33,7 +34,7 @@
 					<input type="password" placeholder="密码(不少于6位)" class="psd required" id="psd" name="password"/>
 				</li>
 			</ul>
-			<button type="submit" class="submit_btn" id="btnSubmit" onclick="sendSubmit()">注册知乎</button>
+			<button type="submit" class="submit_btn" id="btnSubmit" onclick="sendSubmit()">注册</button>
 			<span class="agreement-tip">点击「注册」按钮，即代表你同意<a href="javascript:;">《LINX协议》</a></span>
 		</form>
 		<div class="QRcode_btn">
@@ -56,6 +57,8 @@
 	<script src="/lib/particles/js/app.js"></script>
 	<!-- <script src="../assets/libs/particles/js/lib/stats.js"></script> -->
 	<script>
+		
+		console.log(status);
 		var count_particles, stats, update;
 		stats = new Stats;
 		stats.setMode(0);
@@ -143,16 +146,18 @@
 			$(this).triggerHandler("blur");
 		});
 
-				//点击重置按钮时，通过trigger()来触发文本框的失去焦点事件
+				// 点击重置按钮时，通过trigger()来触发文本框的失去焦点事件
 		$("#btnSubmit").click(function(){
+			
     		//trigger 事件执行完后，浏览器会为submit按钮获得焦点
     		$("form .required:input").trigger("blur"); 
     		var numError = $("form .onError").length;
     		if(numError){
     			return false;
     		}
-    		alert('注册成功！')
-
+			if(status){
+				alert("注册成功")
+			}
     	});
 		})
 		

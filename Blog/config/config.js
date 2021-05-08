@@ -5,7 +5,7 @@ let dbConfig = {
     port :"3306",
     user : "root",
     password :"121",
-    database:"Demo",
+    database:"demo",
 };
 
  let db = mysql.createConnection({
@@ -13,7 +13,7 @@ let dbConfig = {
     port :"3306",
     user : "root",
     password :"121",
-    database:"Demo"
+    database:"demo"
  });
  module.exports = db;
 
