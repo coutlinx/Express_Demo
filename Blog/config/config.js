@@ -5,15 +5,15 @@ let dbConfig = {
     port :"3306",
     user : "root",
     password :"121",
-    database:"Demo",
+    database:"Blog",
 };
 
- let db = mysql.createConnection({
-    host:"localhost",
-    port :"3306",
-    user : "root",
-    password :"121",
-    database:"Demo"
- });
+ let db = mysql.createConnection(
+   dbConfig
+ );
+
+//  db.connect();
+
+//  db.end();
  module.exports = db;
 
