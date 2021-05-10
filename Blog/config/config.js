@@ -5,15 +5,20 @@ let dbConfig = {
     port :"3306",
     user : "root",
     password :"121",
-    database:"Demo",
+    database:"demo",
 };
 
- let db = mysql.createConnection({
-    host:"localhost",
-    port :"3306",
-    user : "root",
-    password :"121",
-    database:"Demo"
- });
- module.exports = db;
+ let db = mysql.createConnection(dbConfig);
+ let session_config = {
+    key:"linx",
+    secret:"linx",
+    rolling:true,
+    renew:false,
+    resave: false,
+    saveUninitialized:true,
+    cookie:{
+        maxAge:400000
+    }
+ }
+ module.exports = {db:db,session_config:session_config};
 

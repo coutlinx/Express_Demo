@@ -4,18 +4,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var ejs = require('ejs');
+var session = require('express-session');
+var config = require('./config/config');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var typeRouter = require('./routes/type');
 var archiversRouter = require('./routes/archives');
-var registerRouter = require('./routes/register')
+var registerRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
 var musicRouter = require('./routes/music');
 var messageRouter = require('./routes/message');
 var fridensRouter = require('./routes/firends');
 var aboutRouter = require('./routes/about');
 var pictureRouter = require('./routes/picture');
+var adminRouter = require('./routes/ad_index');
 var app = express();
 
 // view engine setup
@@ -27,6 +30,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session(config.session_config));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -40,6 +44,7 @@ app.use('/message',messageRouter);
 app.use('/friends',fridensRouter);
 app.use('/about',aboutRouter);
 app.use('/picture',pictureRouter);
+app.use('/admin',adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
