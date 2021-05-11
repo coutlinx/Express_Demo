@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('login');
 });
 
-router.post('/',(req,res) =>{
+router.post('/Log',(req,res) =>{
   let admin = false;
   console.log(req.body);
   let user = new creatUser(req.body.name,req.body.password);
@@ -18,7 +18,7 @@ router.post('/',(req,res) =>{
       admin = true;
     }
     if (!admin){
-      db.db.query("select name from user where name = ? and password = ?",[user.name,user.password],(err,results,fields) =>{
+      db.db.query("select name from user where (name = ? or mobile = ? )and password = ?",[user.name,user.name,user.password],(err,results,fields) =>{
         if (err!=null){
           console.log(err)
         }
@@ -28,9 +28,11 @@ router.post('/',(req,res) =>{
             name :user.name,
             password :user.password,
           }
-          res.redirect("http://localhost:3000/")
+          res.render("index");
+          return;
         }else if (len == 0){
-          res.send("<h1>账户或密码错误</h1>")
+          res.json({status:"账号或密码错误!"});
+          return;
         }
     })
     }else{
@@ -38,7 +40,8 @@ router.post('/',(req,res) =>{
         name :user.name,
         password :user.password,
       }
-      res.redirect("http://localhost:3000/admin")
+      res.redirect("http://localhost:3000/admin");
+      return;
     }
   })
   

@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
                 console.log(err)
             }
             if (result.length>0){
-                res.render('admin/index');
+                res.render("admin/index");
             }else{
                 res.send("<h1>您不是管理员,请点击旁边按钮跳转到登录界面</h1><a href='http://localhost:3000/login'>登录</a>")
             }
