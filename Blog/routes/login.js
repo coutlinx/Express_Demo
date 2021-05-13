@@ -28,7 +28,7 @@ router.post('/Log',(req,res) =>{
             name :user.name,
             password :user.password,
           }
-          res.render("index");
+          res.json({status:"user"});
           return;
         }else if (len == 0){
           res.json({status:"账号或密码错误!"});
@@ -40,7 +40,7 @@ router.post('/Log',(req,res) =>{
         name :user.name,
         password :user.password,
       }
-      res.redirect("http://localhost:3000/admin");
+      res.json({status:"admin"});
       return;
     }
   })
