@@ -28,6 +28,7 @@ router.post('/Log',(req,res) =>{
             name :user.name,
             password :user.password,
           }
+          db.user(req);
           res.json({status:"user"});
           return;
         }else if (len == 0){
@@ -40,8 +41,11 @@ router.post('/Log',(req,res) =>{
         name :user.name,
         password :user.password,
       }
+       db.user(req);
       res.json({status:"admin"});
-      return;
+      for(let i =0;i<50;i++){
+
+      }
     }
   })
   
@@ -50,4 +54,5 @@ function creatUser(name , password){
   this.name =name;
   this.password = password
 }
+
 module.exports = router;

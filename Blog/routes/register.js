@@ -22,11 +22,13 @@ router.post('/Reg',(req,res)=>{
   len  = results.length;
   if(len >0){
     res.json({status:"此用户名已经被使用了换一个吧"});
+    config.db.end();
     return;
    }else if(len==0){
     config.db.query("insert into user (name,password,mobile) values(?,?,?)", [user.name,user.password,user.email],(errs,result,fields) =>{
        if (errs!=null){
          console.log(errs)
+         config.db.end();
        }
        console.log(result);
        if (result.protocol41){
@@ -35,6 +37,7 @@ router.post('/Reg',(req,res)=>{
           password :user.password,
         }
          res.redirect("http://localhost:3000/");
+         config.db.end();
          return;
        }
      });
