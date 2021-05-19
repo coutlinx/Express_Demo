@@ -7,20 +7,32 @@ router.get("/", function (req, res, next) {
     res.redirect("/login");
   } else {
     db.db.query(
-      "select Aname from Admin where Aname = ? and Apassword = ?",
-      [db.users.name, db.users.pass],
+      "select Aname from tab_admin where Aname = ? and Apassword = ?",
+      [req.session.user.name, req.session.user.password],
       (err, result, fileds) => {
         console.log(result);
         if (err != null) {
           console.log(err);
-          config.db.end();
         }
         if (result.length > 0) {
-          res.render("admin/index", {
-            name: db.users.name,
-            icon: db.users.icon,
-          });
-          config.db.end();
+         config.AdminIcon(req.session.user.name,(err,results) =>{
+          let icon = null;
+            if (err != null) {
+              console.log(err);
+            } else if (results.length > 0) {
+              icon =  results[0].icon;
+            } else {
+              icon = "3.jpg";
+            }
+            config.users.name=req.session.user.name;
+            config.users.pass=req.session.user.password;
+            config.users.icon=icon;
+            console.log(config.users);
+            res.render("admin/index", {
+              name: config.users.name,
+              icon: config.users.icon
+            });
+         })
           return;
         } else {
           res.send(

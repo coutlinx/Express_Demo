@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 var nodemail = require("nodemailer");
-var async = require("async");
+
 let dbConfig = {
   host: "localhost",
   port: "3306",
@@ -8,12 +8,15 @@ let dbConfig = {
   password: "121",
   database: "demo",
 };
+
 let users = {
   name: "",
   pass: "",
   icon: "",
 };
+
 let db = mysql.createConnection(dbConfig);
+
 let session_config = {
   key: "linx",
   secret: "linx",
@@ -25,6 +28,8 @@ let session_config = {
     maxAge: 400000,
   },
 };
+
+let article = [];
 let mailTransport = nodemail.createTransport({
   host: "smtp.qq.com",
   secure: true,
@@ -34,7 +39,9 @@ let mailTransport = nodemail.createTransport({
     pass: "owsmwxnquitmfigj",
   },
 });
+
 let code = "";
+
 function Sendmaile(maile) {
   for (let i = 0; i < 6; i++) {
     code += parseInt(Math.random() * 10);
@@ -62,52 +69,58 @@ function Sendmaile(maile) {
   );
   return code;
 }
+
 function user(req) {
   users.name = req.session.user.name;
   users.pass = req.session.user.password;
-  let task=[
-    function(){ AdminIcon()},
-    function(){UserIcon()}
-  ];
-//   async.waterfall(task,(err,results)=>{
-//       if(err){
-//           console.log(err);
-//       }else{
-//         console.log(results);
-//         db.end();
-//       }
-//   })
-  console.log(AdminIcon(users.name));
+  AdminIcon(users.name);
+  return users;
 }
- function AdminIcon(name) {
-   db.query(
-    "select icon from admin where Aname = ?",
+
+function AdminIcon(name, callback) {
+  db.query(
+    "select icon from tab_admin where Aname = ?",
     [name],
-    (err, results) => {
-      if (err != null) {
-        console.log(err);
-      } else if (results.length > 0) {
-        return results[0].icon;
-      } else {
-        return "3.jpg";
-      }
+    (err, results, fields) => {
+      callback(err, results);
     }
   );
 }
-async function UserIcon(name) {
-   db.query(
+async function UserIcon(name, callback) {
+  db.query(
     "select icon from user where name =?",
     [users.name],
-    (err, results) => {
-      if (err != null) {
-        console.log(err);
-      } else if (results.length > 0) {
-        return results[0].icon;
-      } else {
-        return "3.jpg";
-      }
+    (err, results, fields) => {
+      callback(err, results);
     }
   );
+}
+function getArticle(callback) {
+  let ID,
+    Title,
+    Time,
+    Type = [];
+  db.query(
+    "select article_id,article_title,article_date,article_types,article_recommend,article_status FROM `文章表` ORDER BY article_id LIMIT 0,10",
+    (err, results, fields) => {
+      callback(err, results);
+    }
+  );
+}
+function HasSession(req, res) {
+  if (req.session.user == undefined) {
+    res.send(
+      "<h1>您不是管理员,请点击旁边按钮跳转到登录界面</h1><a href='http://localhost:3000/login'>登录</a>"
+    );
+    return false;
+  } else {
+    return true;
+  }
+}
+function DeletArticle(id,callback){
+  db.query("DELETE FROM `文章表` WHERE article_id = ?",[id],(err,result,fields)=>{
+    callback(err,result);
+  })
 }
 module.exports = {
   db: db,
@@ -117,4 +130,10 @@ module.exports = {
   code: code,
   user,
   users: users,
+  UserIcon,
+  AdminIcon,
+  getArticle,
+  HasSession,
+  article: article,
+  DeletArticle
 };

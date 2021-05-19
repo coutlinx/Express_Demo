@@ -10,7 +10,7 @@ router.post('/Log',(req,res) =>{
   let admin = false;
   console.log(req.body);
   let user = new creatUser(req.body.name,req.body.password);
-  db.db.query("select Aname from admin where Aname = ? and Apassword = ?",[user.name,user.password],(err,results,fields)=>{
+  db.db.query("select Aname from tab_admin where Aname = ? and Apassword = ?",[user.name,user.password],(err,results,fields)=>{
     if (err !=null){
       console.log(err);
     }
@@ -28,7 +28,6 @@ router.post('/Log',(req,res) =>{
             name :user.name,
             password :user.password,
           }
-          db.user(req);
           res.json({status:"user"});
           return;
         }else if (len == 0){
@@ -41,7 +40,6 @@ router.post('/Log',(req,res) =>{
         name :user.name,
         password :user.password,
       }
-       db.user(req);
       res.json({status:"admin"});
       for(let i =0;i<50;i++){
 
