@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,22 +9,26 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
   <link rel="stylesheet" href="/stylesheets/me.css" th:href="@{/css/me.css}">
 </head>
+
 <body>
 
   <!--导航栏-->
-  <nav class="ui inverted gird-header" >
+  <nav class="ui inverted gird-header">
     <div class="ui container">
       <div class="ui inverted secondary stackable menu">
         <h2 class="ui olive header item" style="font-family: STSong">管理后台</h2>
-        <a href="http://localhost:3000/admin/blogs" class="active m-item item m-mobile-hide"><i class="home icon"></i>文章管理</a>
-        <a href="http://localhost:3000/admin/types" class=" m-item item m-mobile-hide"><i class="clone outline icon"></i>分类管理</a>
+        <a href="http://localhost:3000/admin/blogs" class="active m-item item m-mobile-hide"><i
+            class="home icon"></i>文章管理</a>
+        <a href="http://localhost:3000/admin/types" class=" m-item item m-mobile-hide"><i
+            class="clone outline icon"></i>分类管理</a>
         <a href="#" class=" m-item item m-mobile-hide"><i class="pencil alternate icon"></i>友链管理</a>
-        <a href="http://localhost:3000/admin/picture" class=" m-item item m-mobile-hide"><i class="image icon"></i>相册管理</a>
+        <a href="http://localhost:3000/admin/picture" class=" m-item item m-mobile-hide"><i
+            class="image icon"></i>相册管理</a>
         <div class="right m-item m-mobile-hide menu">
           <div class="ui dropdown  item">
             <div class="text">
-              <img class="ui avatar image" src="/images/me.jpg" th:src="@{/images/me.jpg}">
-              <span>oneStar</span>
+              <img class="ui avatar image" src="/images/<%= icon%>" th:src="@{/images/<%= icon%>}">
+              <span><%= name %></span>
             </div>
             <i class="dropdown icon"></i>
             <div class="menu">
@@ -38,14 +43,14 @@
     </a>
   </nav>
   <div class="m-padded-tb-hugex">
-  <div class="ui attached pointing menu">
-    <div class="ui container">
-      <div class="right menu">
-        <a href="#" class=" item">发布</a>
-        <a href="#" class="teal active item">列表</a>
+    <div class="ui attached pointing menu">
+      <div class="ui container">
+        <div class="right menu">
+          <a href="#" class=" item">发布</a>
+          <a href="#" class="teal active item">列表</a>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
   <br>
@@ -53,10 +58,10 @@
   <br>
 
   <!--中间内容-->
-  <div  class="">
+  <div class="">
     <div class="ui container">
-      <div  class="ui secondary segment form">
-        <input type="hidden" name="page" >
+      <div class="ui secondary segment form">
+        <input type="hidden" name="page">
         <div class="inline fields">
           <div class="field">
             <input type="text" name="title" placeholder="标题">
@@ -76,44 +81,50 @@
 
           </div>
           <!--<div class="field">-->
-            <!--<div class="ui checkbox">-->
-              <!--<input type="checkbox" id="recommend" name="recommend">-->
-              <!--<label for="recommend">推荐</label>-->
-            <!--</div>-->
+          <!--<div class="ui checkbox">-->
+          <!--<input type="checkbox" id="recommend" name="recommend">-->
+          <!--<label for="recommend">推荐</label>-->
+          <!--</div>-->
           <!--</div>-->
           <div class="field">
-            <button  type="button" id="search-btn" class="ui mini teal basic button"><i class="search icon"></i>搜索</button>
+            <button type="button" id="search-btn" class="ui mini teal basic button"><i
+                class="search icon"></i>搜索</button>
           </div>
         </div>
       </div>
       <div id="table-container">
         <table class="ui compact teal table">
           <thead>
-          <tr align="center">
-            <th>ID</th>
-            <th>标题</th>
-            <th>类型</th>
-            <th>推荐</th>
-            <th>状态</th>
-            <th>更新时间</th>
-            <th>操作</th>
-          </tr>
+            <tr align="center">
+              <th>ID</th>
+              <th>标题</th>
+              <th>类型</th>
+              <th>推荐</th>
+              <th>状态</th>
+              <th>更新时间</th>
+              <th>操作</th>
+            </tr>
           </thead>
+          <%for(let i of article){
+          %>
           <tbody>
-          <tr align="center">
-            <td>1</td>
-            <td>大圣，此去欲何?</td>
-            <td>我的故事</td>
-            <td>是</td>
-            <td>草稿</td>
-            <td>2020-01-02 05:20</td>
-            <td>
-              <!--th:href="@{/admin/types/{id}/input(id=${type.id})}"-->
-              <a href="#" class="ui mini teal basic button">编辑</a>
-              <a href="#" onclick="return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')" class="ui mini red basic button">删除</a>
-            </td>
-          </tr>
+            <tr align="center">
+              <td><%= i.ID %></td>
+              <td><%= i.Title %></td>
+              <td><%= i.Type %></td>
+              <td><%= i.Recommend %></td>
+              <td><%= i.Status %></td>
+              <td><%= i.Time %></td>
+              <td>
+                <!--th:href="@{/admin/types/{id}/input(id=${type.id})}"-->
+                <a href="#" class="ui mini teal basic button">编辑</a>
+                <a href="#" onclick="return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')" class="ui mini red basic button"
+                  id="delet">删除</a>
+              </td>
+            </tr>
           </tbody>
+
+          <%}%>
           <tfoot>
           <tr>
             <th colspan="7">
@@ -308,7 +319,21 @@
         page : $("[name='page']").val()
       });
     }
-
+    $("#delet").click((e)=>{
+      let id = e.delegateTarget.parentElement.parentElement.children[0].innerHTML;
+      $.ajax({
+    method:"post",
+    url:"http://localhost:3000/admin/blogs/delet",
+    data:{ID:id},
+    success:function(data){
+      console.log(data)
+      if(data.status == "success"){
+        e.delegateTarget.parentElement.parentElement.parentElement.removeChild(e.delegateTarget.parentElement.parentElement);
+      }
+    }
+    
+      })
+    })
   </script>
 </body>
 </html>
