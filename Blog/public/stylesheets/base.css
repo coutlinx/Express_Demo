@@ -141,3 +141,16 @@ textarea:focus {
 	border:1px solid #0f88eb;  /*----- 主色调颜色 -----*/
 	/*box-shadow: 0 0 10px #ffdb81;*/
 }
+.email{
+	display: inline-block;
+	line-height: 2rem;
+	width: 15%;
+	text-align: center;
+	border-radius: 4px;
+	border:2px #0f88eb;
+	background-color: #0f88eb;
+	color: white;
+	position: absolute;
+	top:15%;
+	left: -16%;	
+}

@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  if (req.session.user == undefined){
+    res.redirect("http://localhost:3000/login")
+  }else{
+    res.render('index');
+  }
 });
 
 module.exports = router;

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>UI组件之排序表格</title>
+	<link rel="stylesheet" type="text/css" href="../stylesheets/Table.css">
+</head>
+<body>	
+	<table>
+		<thead>
+			<tr>
+				<td>姓名</span></td>
+				<td>语文<span class="upBtn"></span><span class="downBtn"></td>
+				<td>数学<span class="upBtn"></span><span class="downBtn"></td>
+				<td>英语<span class="upBtn"></span><span class="downBtn"></td>
+				<td>总分<span class="upBtn"></span><span class="downBtn"></td>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+			for (let i of detial) {
+				%>
+			<tr>
+				<td><%= i.name %></td>
+				<td><%=i.Chinese %></td>
+				<td><%=i.math %></td>
+				<td><%=i.English %></td>
+				<td><%=i.total %></td>
+			</tr>
+			<%
+			}
+			%>
+		</tbody>
+	</table>
+	<script type="text/javascript" src="../javascripts/Table.js"></script>
+</body>
+</html>

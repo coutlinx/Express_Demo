@@ -550,4 +550,16 @@ body{
     background-image: url(https://a-oss.zmki.cn/2020/20200212-fcf30f3d33625.gif);
     background-size: 100% 100%;
 }
+.buttons{
+    display: block;
+    line-height: 45px;
+    width: 40%;
+    height: 50px;
+    padding: 5px 10px;
+    margin: 8px 0;
+    color: #fff;
+    background: #ef4d4d;
+    border-radius: 4px;  
+    border:0px 
+}
 
