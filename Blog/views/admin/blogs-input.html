@@ -52,10 +52,10 @@
   <!--中间内容-->
   <div  class="">
     <div class="ui container">
-      <form id="blog-form" action="#" method="post" class="ui form">
+      <form id="blog-form" action="" method="post" class="ui form">
         <input type="hidden" name="published">
         <input type="hidden" name="id">
-
+        <input type="hidden" name="linx" id="linxs">
         <div class="required field">
           <div class="ui left labeled input">
             <div class="ui selection compact teal basic dropdown label">
@@ -73,7 +73,7 @@
         </div>
 
         <div class="required field">
-          <div class="" id="md-content" style="z-index: 1 !important;">
+          <div class="" id="md-content"  style="z-index: 1 !important;">
             <textarea placeholder="博客内容" name="content" style="display: none" ></textarea>
           </div>
         </div>
@@ -269,7 +269,8 @@
         height  : 640,
         syncScrolling : "single",
 //        path    : "../static/lib/editormd/lib/"
-        path    : "/lib/editormd/lib/"
+        path    : "/lib/editormd/lib/",
+        saveHTMLToTextarea: true,
       });
     });
     $('.menu.toggle').click(function () {
@@ -281,6 +282,7 @@
     });
 
     $('#save-btn').click(function () {
+      $('#linxs')[0].value =$(".editormd-preview-container")[0].innerHTML; 
       $('[name="published"]').val(false);
       $('#blog-form').submit();
     });

@@ -5,5 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('admin/blogs-input');
 });
-
+router.post('/',(req,res)=>{
+  console.log(req.body);
+})
 module.exports = router;
