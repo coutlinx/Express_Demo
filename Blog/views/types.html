@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="/stylesheets/me.css" th:href="@{/css/me.css}">
 </head>
 <body>
+   <script>
+     
+   </script>
 
 <!--导航-->
 <nav class="gird-header">
@@ -59,7 +62,7 @@
     <div class="ui segment m-padded-tb-large m-opacity">
       <div class="ui container" align="center">
         <div class="ui labeled button m-margin-tb-tiny">
-          <a href="#" class="ui basic  button">好文</a>
+          <a href="#" class="ui basic  button"><%=list.sort_name%></a>
           <div class="ui basic  left pointing label">24</div>
         </div>
       </div>
@@ -107,21 +110,35 @@
 
     <!--分页-->
     <div class="ui bottom attached segment m-opacity stackable grid">
-      <div class="three wide column" align="center">
-        <a class="item">上一页</a>
+      <div class="three wide column" align="left">
+        <a class="item" name="home_page">首页</a>
+      </div>
+      
+      <div class="three wide column" align="left">
+        <a class="item" name="before">上一页</a>
       </div>
 
-      <div class="ten wide column" align="center">
-        <p> <span></span> / <span></span> </p>
+      <div class="three wide column" align="left">
+        <a class="item" name="first">1</a>
       </div>
 
-      <div class="three wide column" align="center">
-        <a class="item">下一页</a>
+      <div class="three wide column" align="left">
+        <a class="item" name="second">2</a>
       </div>
+
+      <div class="three wide column" align="left">
+        <a class="item" name="third">3</a>
+      </div>
+
+      <div class="three wide column" align="right" style="margin-top: -47px; left: 843px;" >
+        <a class="item" name="after">下一页</a>
+      </div>
+     </div>
+
+
+
     </div>
-
   </div>
-</div>
 
 <br>
 <br>

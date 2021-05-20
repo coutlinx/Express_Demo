@@ -5,12 +5,12 @@ let dbConfig = {
     port :"3306",
     user : "root",
     password :"121",
-    database:"demo",
+    database:"blog"
 };
 
  let db = mysql.createConnection(dbConfig);
  let session_config = {
-    key:"linx",
+    key:"linx",     
     secret:"linx",
     rolling:true,
     renew:false,
