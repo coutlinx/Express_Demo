@@ -6,11 +6,11 @@ router.get('/', function(req, res, next) {
   res.render('login');
 });
 
-router.post('/Log',(req,res) =>{
+router.post('/Log',(req,res) =>{z
   let admin = false;
   console.log(req.body);
   let user = new creatUser(req.body.name,req.body.password);
-  db.db.query("select Aname from tab_admin where Aname = ? and Apassword = ?",[user.name,user.password],(err,results,fields)=>{
+  db.db.query("select admin_name from tab_admin where admin_name = ? and admin_password = ?",[user.name,user.password],(err,results,fields)=>{
     if (err !=null){
       console.log(err);
     }
@@ -18,7 +18,7 @@ router.post('/Log',(req,res) =>{
       admin = true;
     }
     if (!admin){
-      db.db.query("select name from user where (name = ? or mobile = ? )and password = ?",[user.name,user.name,user.password],(err,results,fields) =>{
+      db.db.query("select use_name from user where (use_name = ? or use_phone = ? )and use_password = ?",[user.name,user.name,user.password],(err,results,fields) =>{
         if (err!=null){
           console.log(err)
         }
