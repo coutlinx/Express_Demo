@@ -88,7 +88,7 @@
                 <!--编辑-->
                 <input type="hidden" name="typeId" >
                 <i class="dropdown icon"></i>
-                <div class="text"><%= Classify%></div>
+                <div class="default text"><%= Classify %></div>
                 <div class="menu">
                   <div class="item" data-value="1">我的故事</div>
                 </div>
@@ -227,17 +227,14 @@
     let article_admire = $("#article_admire").val();
     let article_reprint = $("#article_reprint").val();
     let article_discuss = $("#article_discuss").val();
-    if(article_recommend_status == "true"){
+    if(article_recommend_status = "true"){
       $("#recommend").attr("checked",'true');
     }
-    if(article_admire == "true"){
+    if(article_admire = "true"){
       $("#appreciation").attr("checked",'true');
     }
-    if(article_reprint == "true"){
+    if(article_reprint = "true"){
       $("#shareStatement").attr("checked",'true');
-    }
-    if(article_discuss == "true"){
-      $("#commentabled").attr("checked",'true');
     }
       // $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
 

@@ -8,7 +8,7 @@ router.get("/", function (req, res, next) {
   if (req.session.user == undefined) {
     res.redirect("/login");
   }
-  if (req.session.MD != undefined && req.session.compile) {
+  if (req.session.MD != undefined&&req.session.compile) {
     req.session.compile = false;
     res.render("admin/blogs-input", {
       MD: req.session.MD,
@@ -17,24 +17,16 @@ router.get("/", function (req, res, next) {
       Photo: req.session.photo,
       Classify: req.session.classify,
       Introduce: req.session.introduce,
-      article_recommend_status: req.session.article_recommend_status,
-      article_admire: req.session.article_admire,
-      article_reprint: req.session.article_reprint,
-      article_discuss: req.session.article_discuss,
+      article_recommend_status:req.session.article_recommend_status,
+      article_admire:req.session.article_admire,
+      article_reprint:req.session.article_reprint,
+      article_discuss:req.session.article_discuss
     });
   } else {
-    res.render("admin/blogs-input", {
-      MD: "",
-      Title: "",
-      Type: "原创",
-      Photo: "",
-      Classify: "",
-      Introduce: "",
-      article_recommend_status: "",
-      article_admire: "",
-      article_reprint: "",
-      article_discuss: "",
-    });
+    res.render("admin/blogs-input", { MD: "" ,Title:"",Type:"",Photo:"",Classify:"",Introduce:"",article_recommend_status:"",
+    article_admire:"",
+    article_reprint:"",
+    article_discuss:""});
   }
 });
 router.post("/", (req, res) => {

@@ -26,7 +26,7 @@ router.get("/", function (req, res, next) {
     res.render("admin/blogs-input", {
       MD: "",
       Title: "",
-      Type: "原创",
+      Type: "",
       Photo: "",
       Classify: "",
       Introduce: "",

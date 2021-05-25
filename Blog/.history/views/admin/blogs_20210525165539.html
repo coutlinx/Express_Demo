@@ -109,17 +109,17 @@
           %>
           <tbody>
             <tr align="center">
-              <td><%= i.article_id %></td>
-              <td><%= i.article_title %></td>
-              <td><%= i.article_classify %></td>
-              <td><%= i.article_recommend %></td>
-              <td><%= i.article_status %></td>
-              <td><%= i.article_date%></td>
+              <td><%= i.ID %></td>
+              <td><%= i.Title %></td>
+              <td><%= i.Type %></td>
+              <td><%= i.Recommend %></td>
+              <td><%= i.Status %></td>
+              <td><%= i.Time %></td>
               <td>
                 <!--th:href="@{/admin/types/{id}/input(id=${type.id})}"-->
                 <a href="#" class="ui mini teal basic button complie">编辑</a>
-                <a href="#" onclick="return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')" class="ui mini delet red basic button"
-                  >删除</a>
+                <a href="#" onclick="return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')" class="ui mini red basic button"
+                  id="delet">删除</a>
               </td>
             </tr>
           </tbody>
@@ -300,7 +300,7 @@
     })
   });
   
-  $(".delet").click(function(e){
+  $("#delet").click(function(e){
     let id = e.delegateTarget.parentElement.parentElement.children[0].innerHTML
     $.ajax({
       method:"post",
@@ -308,7 +308,6 @@
     data:{ID:id},
     success:function(data){
       console.log(data.status);
-      window.location.reload();
     }
     })
   })
