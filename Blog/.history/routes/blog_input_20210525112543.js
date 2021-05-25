@@ -18,7 +18,7 @@ router.get("/", function (req, res, next) {
       Introduce: req.session.introduce,
     });
   } else {
-    res.render("admin/blogs-input", { MD: "" ,Title:"",Type:"",Photo:"",Classify:"",Introduce:""});
+    res.render("admin/blogs-input", { MD: "" });
   }
 });
 router.post("/", (req, res) => {

@@ -44,7 +44,7 @@ router.get("/", function (req, res) {
       if(config.article.length == 0){
         config.article.push(article);
       }else{
-        let y = restults.length-1;
+        let y = restults.length;
           if(config.article[y] == undefined){
             config.article.push(article);
             y--;
@@ -54,9 +54,6 @@ router.get("/", function (req, res) {
             y--;
           }else{
             y--;
-          }
-          if(y<0){
-            y =0;
           }
         
       }
@@ -82,16 +79,11 @@ router.post("/delet", (req, res) => {
 });
 router.post("/compile",(req,res)=>{
   if(req.body.Title != undefined){
-    config.db.query("select article_md,article_title,article_type_creat,article_photo,article_photo,article_content from essay where article_title = ?",[req.body.Title],(err,restults,fil)=>{
+    config.db.query("select article_md from essay where article_title = ?",[req.body.Title],(err,restults,fil)=>{
       if  (err != null){
         console.log(err)
       }else{
         req.session.MD = restults[0].article_md;
-        req.session.Title = restults[0].article_title;
-        req.session.type = restults[0].article_type_creat;
-        req.session.photo = restults[0].article_photo;
-        req.session.classify = restults[0].article_photo;
-        req.session.introduce = restults[0].article_content
         res.json({status:"true"});
       }
     })

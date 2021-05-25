@@ -82,16 +82,11 @@ router.post("/delet", (req, res) => {
 });
 router.post("/compile",(req,res)=>{
   if(req.body.Title != undefined){
-    config.db.query("select article_md,article_title,article_type_creat,article_photo,article_photo,article_content from essay where article_title = ?",[req.body.Title],(err,restults,fil)=>{
+    config.db.query("select article_md,article_title,article_type_creatarticle_photo,article_classify,article_content from essay where article_title = ?",[req.body.Title],(err,restults,fil)=>{
       if  (err != null){
         console.log(err)
       }else{
         req.session.MD = restults[0].article_md;
-        req.session.Title = restults[0].article_title;
-        req.session.type = restults[0].article_type_creat;
-        req.session.photo = restults[0].article_photo;
-        req.session.classify = restults[0].article_photo;
-        req.session.introduce = restults[0].article_content
         res.json({status:"true"});
       }
     })

@@ -9,16 +9,9 @@ router.get("/", function (req, res, next) {
     res.redirect("/login");
   }
   if (req.session.MD != undefined) {
-    res.render("admin/blogs-input", {
-      MD: req.session.MD,
-      Title: req.session.Title,
-      Type: req.session.type,
-      Photo: req.session.photo,
-      Classify: req.session.classify,
-      Introduce: req.session.introduce,
-    });
+    res.render("admin/blogs-input", { MD: req.session.MD });
   } else {
-    res.render("admin/blogs-input", { MD: "" ,Title:"",Type:"",Photo:"",Classify:"",Introduce:""});
+    res.render("admin/blogs-input", { MD: "" });
   }
 });
 router.post("/", (req, res) => {
