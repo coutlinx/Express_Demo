@@ -25,17 +25,43 @@ router.get("/", function (req, res) {
     }else{
     for (let i = 0; i < restults.length; i++) {
       if (restults[i].article_recommend == "true") {
-        restults[i].article_recommend = "是";
+        Recommend = "是";
       } else if (restults[i].article_recommend == "false") {
-        restults[i].article_recommend = "否";
+        Recommend = "否";
       }
       if (restults[i].article_status == "draft") {
-        restults[i].article_status = "草稿";
+        Status = "草稿";
       } else if (restults[i].article_status == "article") {
-        restults[i].article_status = "成品";
+        Status = "成品";
+      }
+      let article = {
+        ID: restults[i].article_id,
+        Title: restults[i].article_title,
+        Time: restults[i].article_date,
+        Type: restults[i].article_types,
+        Recommend: Recommend,
+        Status: Status,
+      };
+      if(config.article.length == 0){
+        config.article.push(article);
+      }else{
+        let y = restults.length-1;
+          if(config.article[y] == undefined){
+            config.article.push(article);
+            y--;
+          }
+          else if ((restults[y].ID != config.article[y].article_id)) {
+            config.article.push(article);
+            y--;
+          }else{
+            y--;
+          }
+          if(y<0){
+            y =0;
+          }
+        
       }
     }
-       config.article = restults;
     res.render("admin/blogs", {
       name: config.users.name,
       icon: config.users.icon,
@@ -56,7 +82,6 @@ router.post("/delet", (req, res) => {
   });
 });
 router.post("/compile",(req,res)=>{
-  req.session.compile = true;
   let time = sd.format(new Date(req.body.Time));
   if(req.body.Title != undefined){
     config.db.query("select article_md,article_title,article_type_creat,article_photo,article_classify,article_content,article_recommend_status,article_admire,article_reprint,article_discuss  from essay where article_title = ? and article_date = ?",[req.body.Title,time],(err,restults,fil)=>{

@@ -109,17 +109,17 @@
           %>
           <tbody>
             <tr align="center">
-              <td><%= i.article_id %></td>
-              <td><%= i.article_title %></td>
-              <td><%= i.article_classify %></td>
-              <td><%= i.article_recommend %></td>
-              <td><%= i.article_status %></td>
-              <td><%= i.article_date%></td>
+              <td><%= i.ID %></td>
+              <td><%= i.Title %></td>
+              <td><%= i.Type %></td>
+              <td><%= i.Recommend %></td>
+              <td><%= i.Status %></td>
+              <td><%= i.Time %></td>
               <td>
                 <!--th:href="@{/admin/types/{id}/input(id=${type.id})}"-->
                 <a href="#" class="ui mini teal basic button complie">编辑</a>
-                <a href="#" onclick="return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')" class="ui mini delet red basic button"
-                  >删除</a>
+                <a href="#" onclick="return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')" class="ui mini red basic button"
+                  id="delet">删除</a>
               </td>
             </tr>
           </tbody>
@@ -233,14 +233,20 @@
 
   </footer>
 
-
+  <input type="hidden" id="article_recommend_status" value="<%=article_recommend_status %>">
+  <input type="hidden" id="article_admire" value="<%= article_admire %>">
+  <input type="hidden" id="article_reprint" value="<%= article_reprint %>">
+  <input type="hidden" id="article_discuss" value="<%= article_discuss %>">
 
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 
   <script>
-
+    let article_recommend_status = $("#article_recommend_status").val()
+    let article_admire = $("#article_admire").val();
+    let article_reprint = $("#article_reprint").val();
+    let article_discuss = $("#article_discuss").val();
       // $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
 
       // 运行时间统计
@@ -299,20 +305,7 @@
       }
     })
   });
-  
-  $(".delet").click(function(e){
-    let id = e.delegateTarget.parentElement.parentElement.children[0].innerHTML
-    $.ajax({
-      method:"post",
-    url:"http://localhost:3000/admin/blogs/delet",
-    data:{ID:id},
-    success:function(data){
-      console.log(data.status);
-      window.location.reload();
-    }
-    })
-  })
-  $('.menu.toggle').click(function () {
+    $('.menu.toggle').click(function () {
       $('.m-item').toggleClass('m-mobile-hide');
     });
 
