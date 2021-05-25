@@ -79,7 +79,7 @@ function user(req) {
 
 function AdminIcon(name, callback) {
   db.query(
-    "select icon from tab_admin where Aname = ?",
+    "select icon from tab_admin where admin_name = ?",
     [name],
     (err, results, fields) => {
       callback(err, results);
@@ -88,7 +88,7 @@ function AdminIcon(name, callback) {
 }
 async function UserIcon(name, callback) {
   db.query(
-    "select icon from user where name =?",
+    "select icon from user where use_name =?",
     [users.name],
     (err, results, fields) => {
       callback(err, results);
@@ -101,7 +101,7 @@ function getArticle(callback) {
     Time,
     Type = [];
   db.query(
-    "select article_id,article_title,article_date,article_types,article_recommend,article_status FROM `文章表` ORDER BY article_id LIMIT 0,10",
+    "select article_id,article_title,article_date,article_classify,article_recommend,article_status FROM essay ORDER BY article_id LIMIT 0,10",
     (err, results, fields) => {
       callback(err, results);
     }
@@ -118,9 +118,12 @@ function HasSession(req, res) {
   }
 }
 function DeletArticle(id,callback){
-  db.query("DELETE FROM `文章表` WHERE article_id = ?",[id],(err,result,fields)=>{
+  db.query("DELETE FROM essay WHERE article_id = ?",[id],(err,result,fields)=>{
     callback(err,result);
   })
+}
+function compile(){
+  
 }
 module.exports = {
   db: db,

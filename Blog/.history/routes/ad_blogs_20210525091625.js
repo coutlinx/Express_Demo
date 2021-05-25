@@ -21,7 +21,7 @@ router.get("/", function (req, res) {
         article: "",
       });
       return
-    }else{
+    }
     for (let i = 0; i < restults.length; i++) {
       if (restults[i].article_recommend == "true") {
         Recommend = "是";
@@ -41,31 +41,22 @@ router.get("/", function (req, res) {
         Recommend: Recommend,
         Status: Status,
       };
-      if(config.article.length == 0){
-        config.article.push(article);
-      }else{
-        let y = restults.length-1;
-          if(config.article[y] == undefined){
-            config.article.push(article);
-            y--;
-          }
-          else if ((restults[y].ID != config.article[y].article_id)) {
-            config.article.push(article);
-            y--;
-          }else{
-            y--;
-          }
-          if(y<0){
-            y =0;
-          }
-        
+      for (let y of config.article) {
+        if ((y.ID = restults[i].article_id)) {
+          res.render("admin/blogs", {
+            name: config.users.name,
+            icon: config.users.icon,
+            article: config.article,
+          });
+          return
+        }
       }
-    }
-    res.render("admin/blogs", {
-      name: config.users.name,
-      icon: config.users.icon,
-      article: config.article,
-    });
+      config.article.push(article);
+      res.render("admin/blogs", {
+        name: config.users.name,
+        icon: config.users.icon,
+        article: config.article,
+      });
     }
   });
 });
@@ -82,21 +73,16 @@ router.post("/delet", (req, res) => {
 });
 router.post("/compile",(req,res)=>{
   if(req.body.Title != undefined){
-    config.db.query("select article_md,article_title,article_type_creat,article_photo,article_photo,article_content from essay where article_title = ?",[req.body.Title],(err,restults,fil)=>{
+    config.db.query("select article_md from essay where article_title = ?",[req.body.Title],(err,restults,fil)=>{
       if  (err != null){
         console.log(err)
       }else{
         req.session.MD = restults[0].article_md;
-        req.session.Title = restults[0].article_title;
-        req.session.type = restults[0].article_type_creat;
-        req.session.photo = restults[0].article_photo;
-        req.session.classify = restults[0].article_photo;
-        req.session.introduce = restults[0].article_content
-        res.json({status:"true"});
+        res.json({status:"true"})
       }
     })
   }else{
-    res.json({status:"false"});
+    res.json({status:"false"})
   }
 })
 module.exports = router;

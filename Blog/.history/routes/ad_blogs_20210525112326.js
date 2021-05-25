@@ -91,7 +91,7 @@ router.post("/compile",(req,res)=>{
         req.session.type = restults[0].article_type_creat;
         req.session.photo = restults[0].article_photo;
         req.session.classify = restults[0].article_photo;
-        req.session.introduce = restults[0].article_content
+        req.session.introduce = restults[0].article_content;
         res.json({status:"true"});
       }
     })

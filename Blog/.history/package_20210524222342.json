@@ -16,7 +16,6 @@
     "mysql": "2.18.1",
     "express-session": "~1.17.1",
     "nodemailer": "~6.6.0",
-    "async": "~3.2.0",
-    "silly-datetime": "~0.1.2"
+    "async": "~3.2.0"
   }
 }

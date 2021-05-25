@@ -117,7 +117,7 @@
               <td><%= i.Time %></td>
               <td>
                 <!--th:href="@{/admin/types/{id}/input(id=${type.id})}"-->
-                <a href="#" class="ui mini teal basic button complie">编辑</a>
+                <a href="#" class="ui mini teal basic button" id="complie">编辑</a>
                 <a href="#" onclick="return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')" class="ui mini red basic button"
                   id="delet">删除</a>
               </td>
@@ -280,17 +280,14 @@
 
 
 
-    $(".complie").click(function(e){
+    $("#complie").click(function(e){
       let title = e.delegateTarget.parentElement.parentElement.children[1].innerHTML
       $.ajax({
         method:"post",
-    url:"http://localhost:3000/admin/blogs/compile",
+    url:"http://localhost:3000/admin/blogs/complie",
     data:{Title:title},
     success:function(data){
       console.log(data.status)
-      if(data.status == "true"){
-        window.location.href = "http://localhost:3000/admin/blogs/input";
-      }
       }
     })
   });

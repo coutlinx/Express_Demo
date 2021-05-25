@@ -7,7 +7,7 @@ router.get("/", function (req, res, next) {
     res.redirect("/login");
   } else {
     db.db.query(
-      "select Aname from tab_admin where Aname = ? and Apassword = ?",
+      "select admin_id from tab_admin where admin_name  = ? and admin_password = ?",
       [req.session.user.name, req.session.user.password],
       (err, result, fileds) => {
         console.log(result);

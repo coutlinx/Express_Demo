@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('login');
 });
 
-router.post('/Log',(req,res) =>{
+router.post('/Log',(req,res) =>{z
   let admin = false;
   console.log(req.body);
   let user = new creatUser(req.body.name,req.body.password);
