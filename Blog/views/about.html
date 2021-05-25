@@ -86,7 +86,8 @@
             <input type="file" id="btn_file" style="display: none;">
             <button type="button" class="buttons" onclick="F_Open_dialog()">修改头像</button>
             <button class="buttons">我喜欢的博客</button>
-            <button class="buttons">登出</button>
+            <button class="buttons" class="buttons" onclick="F_Open_dialog()">修改背景</button>
+            <button class="buttons" id="exist">登出</button>
             <!-- <div>
             <p>“小二，上茶~”</p>
             <p>“来~嘞~，客官您稍等”</p>
@@ -148,7 +149,7 @@
                         <div class="item">
                             <!--微信二维码-->
                             <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced ">关注公众号</div>
-                            <img src="/images/oneStar.jpg" th:src="@{/images/oneStar.jpg}" class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                            <img src="/images/ygh.jpg" th:src="@{/images/ygh.jpg}" class="ui m-margin-top rounded image" alt="" style="width: 110px">
                         </div>
                     </div>
                 </div>
@@ -158,7 +159,7 @@
                         <div class="item">
                             <!--微信二维码-->
                             <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced ">问题交流（QQ群）</div>
-                            <img src="/images/QQ-question.jpg" th:src="@{/images/QQ-question.jpg}" class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                            <img src="/images/ygh.jpg" th:src="@{/images/ygh.jpg}" class="ui m-margin-top rounded image" alt="" style="width: 110px">
                         </div>
                     </div>
                 </div>
@@ -215,6 +216,10 @@
                 // 调用reader.readAsDataURL()方法，把图片转成base64
                 reader.readAsDataURL(file);
             }, false);
+            $("#exist").on("click", function() {
+                sessionStorage.clear()
+                window.location.reload()
+            })
         }
         $('.menu.toggle').click(function() {
             $('.m-item').toggleClass('m-mobile-hide');
