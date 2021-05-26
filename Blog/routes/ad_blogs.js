@@ -1,8 +1,5 @@
 var express = require("express");
-<<<<<<< HEAD
 var sd = require('silly-datetime');
-=======
->>>>>>> YUYUE
 var router = express.Router();
 var config = require("../config/config");
 
@@ -25,7 +22,6 @@ router.get("/", function (req, res) {
         article: "",
       });
       return
-<<<<<<< HEAD
     }else{
     for (let i = 0; i < restults.length; i++) {
       if (restults[i].article_recommend == "true") {
@@ -45,44 +41,6 @@ router.get("/", function (req, res) {
       icon: config.users.icon,
       article: config.article,
     });
-=======
-    }
-    for (let i = 0; i < restults.length; i++) {
-      if (restults[i].article_recommend == "true") {
-        Recommend = "是";
-      } else if (restults[i].article_recommend == "false") {
-        Recommend = "否";
-      }
-      if (restults[i].article_status == "draft") {
-        Status = "草稿";
-      } else if (restults[i].article_status == "article") {
-        Status = "成品";
-      }
-      let article = {
-        ID: restults[i].article_id,
-        Title: restults[i].article_title,
-        Time: restults[i].article_date,
-        Type: restults[i].article_types,
-        Recommend: Recommend,
-        Status: Status,
-      };
-      for (let y of config.article) {
-        if ((y.ID = restults[i].article_id)) {
-          res.render("admin/blogs", {
-            name: config.users.name,
-            icon: config.users.icon,
-            article: config.article,
-          });
-          return
-        }
-      }
-      config.article.push(article);
-      res.render("admin/blogs", {
-        name: config.users.name,
-        icon: config.users.icon,
-        article: config.article,
-      });
->>>>>>> YUYUE
     }
   });
 });
@@ -97,7 +55,6 @@ router.post("/delet", (req, res) => {
     }
   });
 });
-<<<<<<< HEAD
 router.post("/compile",(req,res)=>{
   req.session.compile = true;
   let time = sd.format(new Date(req.body.Time));
@@ -130,7 +87,4 @@ router.post("/compile",(req,res)=>{
     res.json({status:"false"});
   }
 })
-=======
-
->>>>>>> YUYUE
 module.exports = router;

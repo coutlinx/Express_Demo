@@ -6,7 +6,7 @@ let dbConfig = {
   port: "3306",
   user: "root",
   password: "121",
-  database: "demo",
+  database: "blog",
 };
 
 let users = {
@@ -102,6 +102,18 @@ function getArticle(callback) {
     Type = [];
   db.query(
     "select article_id,article_title,article_date,article_classify,article_recommend,article_status FROM essay ORDER BY article_id LIMIT 0,10",
+    (err, results, fields) => {
+      callback(err, results);
+    }
+  );
+}
+function getclassfiytext(callback) {
+  let ID,
+    Title,
+    Time,
+    Type = [];
+  db.query(
+    "select * FROM essay ORDER BY article_id LIMIT 0,10",
     (err, results, fields) => {
       callback(err, results);
     }
