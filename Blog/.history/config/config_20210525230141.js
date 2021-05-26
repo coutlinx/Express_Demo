@@ -1,12 +1,12 @@
 var mysql = require("mysql");
 var nodemail = require("nodemailer");
-var sd = require('silly-datetime');
+
 let dbConfig = {
   host: "localhost",
   port: "3306",
   user: "root",
   password: "121",
-  database: "blog",
+  database: "demo",
 };
 
 let users = {
@@ -44,11 +44,7 @@ let code = "";
 
 function Sendmaile(maile) {
   for (let i = 0; i < 6; i++) {
-    if(code.length<=6){
-      code += parseInt(Math.random() * 10);
-    }else{
-      break;
-    }
+    code += parseInt(Math.random() * 10);
   }
   mailTransport.sendMail(
     {
@@ -111,18 +107,6 @@ function getArticle(callback) {
     }
   );
 }
-function getclassfiytext(callback) {
-  let ID,
-    Title,
-    Time,
-    Type = [];
-  db.query(
-    "select * FROM essay ORDER BY article_id LIMIT 0,10",
-    (err, results, fields) => {
-      callback(err, results);
-    }
-  );
-}
 function HasSession(req, res) {
   if (req.session.user == undefined) {
     res.send(
@@ -133,12 +117,16 @@ function HasSession(req, res) {
     return true;
   }
 }
-function DeletArticle(id,callback){
-  db.query("DELETE FROM essay WHERE article_id = ?",[id],(err,result,fields)=>{
-    callback(err,result);
-  })
+function DeletArticle(id, callback) {
+  db.query(
+    "DELETE FROM essay WHERE article_id = ?",
+    [id],
+    (err, result, fields) => {
+      callback(err, result);
+    }
+  );
 }
-
+function compile() {}
 module.exports = {
   db: db,
   session_config: session_config,
