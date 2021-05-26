@@ -9,12 +9,60 @@
   <link rel="stylesheet" href="/stylesheets/me.css" th:href="@{/css/me.css}">
 </head>
 <body>
+<script>
+  function Type(e){
+    let name = e.delegateTarget.parentElement.value;
+    console.log(name)
+  }
+  function Newpage(){
+      $.ajax({
+        type:"POST",
+        URL:"http://localhost:3000/types/maple_left",
+        success:function(result){
+          var results = JSON.parse(result);
+          var list = results.alarm;
+          var totalCount = results.alarm_count;
+          pages = results.page_count;
+          if (list.length !=0){
+            for (let  i= 0;  i<list.length; i++) {
+              
+              
+            }
+          }
+        } 
+        })
+  }
+  function Newclassfiy(e){
+    let classfiy =e.innerHTML;
+    //  let classfiy=document.getElementsByClassName('ui basic  button').innerHTML;
+              $.ajax({
+                type:"POST",
+                url:"http://localhost:3000/types/newclassfiy",
+                data:{Type:classfiy},
+                success:function(data){
+                   var data=JSON.parse(data);
+                   for (let i = 0; i < data.length; i++){    
+                          if(classfiy==data.new.sort_name){
+                                 
+                            
 
+
+
+                          }else{
+                            console.log("no")
+                          }
+                   }
+                }
+              })
+  }
+</script>
 <!--导航-->
+
+
 <nav class="gird-header">
   <div class="ui container">
     <div class="ui inverted secondary stackable menu">
-      <h2 class="ui olive header item" style="font-family: STSong">ONESTAR</h2>
+      <h2 class="ui olive header item" style="font-family: STSong">LINX</h2>
       <!--<div class="right m-item item m-mobile-hide">-->
         <a href="http://localhost:3000/" class="m-item item m-mobile-hide" ><i class="home icon"></i>首页</a>
         <a href="http://localhost:3000/types" class="active m-item item m-mobile-hide"><i class="clone outline icon"></i>分类</a>
@@ -23,6 +71,7 @@
         <a href="http://localhost:3000/message" class="m-item item m-mobile-hide"><i class="book icon"></i>留言板</a>
         <a href="http://localhost:3000/friends" class="m-item item m-mobile-hide"><i class="pencil alternate icon"></i>友人帐</a>
         <a href="http://localhost:3000/picture" class="m-item item m-mobile-hide"><i class="image icon"></i>照片墙</a>
+        <a href="http://localhost:3000/login" class="m-item item m-mobile-hide"><i class="image icon"></i>登入</a>
         <a href="http://localhost:3000/about" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
       <!--</div>-->
       <div class="right m-item item m-mobile-hide">
@@ -59,56 +108,64 @@
     <div class="ui segment m-padded-tb-large m-opacity">
       <div class="ui container" align="center">
         <div class="ui labeled button m-margin-tb-tiny">
-          <a href="#" class="ui basic  button">好文</a>
-          <div class="ui basic  left pointing label">24</div>
+          <a href="" class="ui basic  button" onclick="Newclassfiy(this)">好文</a>
+          <a href="" class="ui basic  button" onclick="Newclassfiy(this)">go</a>
+          <a href="" class="ui basic  button" onclick="Newclassfiy(this)">c++</a>
+          <a href="" class="ui basic  button" onclick="Newclassfiy(this)">java</a>
+          <div class="ui basic  left pointing label">...</div>
         </div>
       </div>
     </div>
 
+    <% for(let i of datil){
+      %>
     <div class="ui top attached teal m-opacity segment">
-      <div class="ui padded vertical segment m-padded-tb-large">
-        <div class="ui middle aligned mobile reversed stackable grid" >
-          <div class="eleven wide column">
-            <h3 class="ui header" ><a href="#">大圣，此去欲何?</a></h3>
-            <p class="m-text">戴上金箍，没法爱你；放下金箍，没法保护你。我知道上天不会给我第二次机会，曾经我们说好的永远，原来也仅仅只有，十二画，而已。“大圣，此去欲何?”“踏南天，碎凌霄。”“若一去不回……”“便一去不回” 其实很多时候，我们都是有机会的，最后真正放弃的，是我们自己。......</p>
-            <div class="ui grid">
+          <div class="ui padded vertical segment m-padded-tb-large">
+            <div class="ui middle aligned mobile reversed stackable grid" >
               <div class="eleven wide column">
-                <div class="ui mini horizontal link list">
-                  <div class="item">
-                    <img src="/images/3.jpg"  alt="" class="ui avatar image">
-                    <div class="content"><a href="#" target="_blank" class="header">oneStar</a></div>
+                <h3 class="ui header" ><a href="#"><%= i.article_id %>?</a></h3>
+                <p class="m-text"><%=i.article_content%>......</p>
+                <div class="ui grid">
+                  <div class="eleven wide column">
+                    <div class="ui mini horizontal link list">
+                      <div class="item">
+                        <img src="/images/3.jpg"  alt="" class="ui avatar image">
+                        <div class="content"><a href="#" target="_blank" class="header">oneStar</a></div>
+                      </div>
+                      <div class="item">
+                        <i class="calendar icon"></i><span><%=i.article_date %></span>
+                      </div>
+                      <div class="item">
+                        <i class="eye icon"></i> <span><%=i.article_views %></span>
+                      </div>
+                      <div class="item">
+                        <i class="comment outline icon"></i> <span><%=i.article_comment_count %></span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="item">
-                    <i class="calendar icon"></i><span>2020-01-01</span>
-                  </div>
-                  <div class="item">
-                    <i class="eye icon"></i> <span>2222</span>
-                  </div>
-                  <div class="item">
-                    <i class="comment outline icon"></i> <span>2222</span>
+                  <div class="right aligned five wide column">
+                    <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin"><%=i.article_classify %></a>
                   </div>
                 </div>
               </div>
-              <div class="right aligned five wide column">
-                <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin">好文</a>
+    
+              <div class="five wide column">
+                <a href="#" target="_blank">
+                  <img src="/images/5.png" alt="" class="ui rounded image">
+                </a>
               </div>
+    
             </div>
           </div>
-
-          <div class="five wide column">
-            <a href="#" target="_blank">
-              <img src="/images/5.png" alt="" class="ui rounded image">
-            </a>
-          </div>
-
         </div>
-      </div>
-    </div>
+    
+    
+      <%}%>
 
     <!--分页-->
     <div class="ui bottom attached segment m-opacity stackable grid">
       <div class="three wide column" align="center">
-        <a class="item">上一页</a>
+        <a class="item" onclick="Newpage()">上一页</a>
       </div>
 
       <div class="ten wide column" align="center">
@@ -116,7 +173,7 @@
       </div>
 
       <div class="three wide column" align="center">
-        <a class="item">下一页</a>
+        <a class="item" onclick="Newpage()">下一页</a>
       </div>
     </div>
 
