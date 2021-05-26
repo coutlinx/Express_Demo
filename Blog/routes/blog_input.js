@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var express = require("express");
 var sd = require("silly-datetime");
 const config = require("../config/config");
@@ -163,4 +164,16 @@ router.post("/", (req, res) => {
     }
   );
 });
+=======
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('admin/blogs-input');
+});
+router.post('/',(req,res)=>{
+  console.log(req.body);
+})
+>>>>>>> YUYUE
 module.exports = router;
