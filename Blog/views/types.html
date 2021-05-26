@@ -9,7 +9,44 @@
   <link rel="stylesheet" href="/stylesheets/me.css" th:href="@{/css/me.css}">
 </head>
 <body>
-
+<script>
+  function Newpage(){
+      $.ajax({
+        type:"POST",
+        URL:"/maple_left",
+        success:function(result){
+          var results = JSON.parse(result);
+          var list = results.alarm;
+          var totalCount = results.alarm_count;
+          pages = results.page_count;
+          if (list.length !=0){
+            for (let  i= 0;  i<list.length; i++) {
+              
+              
+            }
+          }
+        } 
+        })
+  }
+  function Newclassfiy(){
+     let classfiy=document.getElementsByClassName('ui basic  button').innerHTML;
+              $.ajax({
+                type:"POST",
+                URL:"/newclassfiy",
+                success:function(data){
+                   var data=JSON.parse(data);
+                   for (let i = 0; i < data.length; i++) {
+                          if(classfiy==data.sort_name){
+                            
+                            
+                          }else{
+                            console.log("no")
+                          }
+                   }
+                }
+              })
+  }
+</script>
 <!--导航-->
 <nav class="gird-header">
   <div class="ui container">
@@ -23,6 +60,7 @@
         <a href="http://localhost:3000/message" class="m-item item m-mobile-hide"><i class="book icon"></i>留言板</a>
         <a href="http://localhost:3000/friends" class="m-item item m-mobile-hide"><i class="pencil alternate icon"></i>友人帐</a>
         <a href="http://localhost:3000/picture" class="m-item item m-mobile-hide"><i class="image icon"></i>照片墙</a>
+        <a href="http://localhost:3000/login" class="m-item item m-mobile-hide"><i class="image icon"></i>登入</a>
         <a href="http://localhost:3000/about" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
       <!--</div>-->
       <div class="right m-item item m-mobile-hide">
@@ -59,8 +97,11 @@
     <div class="ui segment m-padded-tb-large m-opacity">
       <div class="ui container" align="center">
         <div class="ui labeled button m-margin-tb-tiny">
-          <a href="#" class="ui basic  button">好文</a>
-          <div class="ui basic  left pointing label">24</div>
+          <a href="#" class="ui basic  button" onclick="Newclassfiy()">好文</a>
+          <a href="#" class="ui basic  button" onclick="Newclassfiy()">go</a>
+          <a href="#" class="ui basic  button" onclick="Newclassfiy()">c++</a>
+          <a href="#" class="ui basic  button" onclick="Newclassfiy()">java</a>
+          <div class="ui basic  left pointing label">...</div>
         </div>
       </div>
     </div>
@@ -108,7 +149,7 @@
     <!--分页-->
     <div class="ui bottom attached segment m-opacity stackable grid">
       <div class="three wide column" align="center">
-        <a class="item">上一页</a>
+        <a class="item" onclick="Newpage()">上一页</a>
       </div>
 
       <div class="ten wide column" align="center">
@@ -116,7 +157,7 @@
       </div>
 
       <div class="three wide column" align="center">
-        <a class="item">下一页</a>
+        <a class="item" onclick="Newpage()">下一页</a>
       </div>
     </div>
 
