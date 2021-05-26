@@ -19,6 +19,10 @@ var fridensRouter = require('./routes/firends');
 var aboutRouter = require('./routes/about');
 var pictureRouter = require('./routes/picture');
 var adminRouter = require('./routes/ad_index');
+var adblogsRouter = require('./routes/ad_blogs');
+var adtypesRouter = require('./routes/ad_types');
+var adpictuerRouter = require('./routes/ad_picture');
+var inputBlogRouter = require('./routes/blog_input');
 var app = express();
 
 // view engine setup
@@ -45,6 +49,10 @@ app.use('/friends',fridensRouter);
 app.use('/about',aboutRouter);
 app.use('/picture',pictureRouter);
 app.use('/admin',adminRouter);
+app.use('/admin/blogs',adblogsRouter);
+app.use('/admin/types',adtypesRouter);
+app.use('/admin/picture',adpictuerRouter);
+app.use('/admin/blogs/input',inputBlogRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
