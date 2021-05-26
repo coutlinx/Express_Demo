@@ -117,16 +117,14 @@ function HasSession(req, res) {
     return true;
   }
 }
-function DeletArticle(id, callback) {
-  db.query(
-    "DELETE FROM essay WHERE article_id = ?",
-    [id],
-    (err, result, fields) => {
-      callback(err, result);
-    }
-  );
+function DeletArticle(id,callback){
+  db.query("DELETE FROM essay WHERE article_id = ?",[id],(err,result,fields)=>{
+    callback(err,result);
+  })
 }
-function compile() {}
+function compile(){
+  
+}
 module.exports = {
   db: db,
   session_config: session_config,
@@ -140,5 +138,5 @@ module.exports = {
   getArticle,
   HasSession,
   article: article,
-  DeletArticle,
+  DeletArticle
 };
