@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 var nodemail = require("nodemailer");
-
+var sd = require('silly-datetime');
 let dbConfig = {
   host: "localhost",
   port: "3306",
@@ -44,7 +44,11 @@ let code = "";
 
 function Sendmaile(maile) {
   for (let i = 0; i < 6; i++) {
-    code += parseInt(Math.random() * 10);
+    if(code.length<=6){
+      code += parseInt(Math.random() * 10);
+    }else{
+      break;
+    }
   }
   mailTransport.sendMail(
     {
@@ -134,9 +138,7 @@ function DeletArticle(id,callback){
     callback(err,result);
   })
 }
-function compile(){
-  
-}
+
 module.exports = {
   db: db,
   session_config: session_config,
