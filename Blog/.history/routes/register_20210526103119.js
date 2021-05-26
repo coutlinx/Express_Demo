@@ -1,5 +1,4 @@
  var express = require('express');
- var sd = require('silly-datetime');
 var router = express.Router();
 var config = require('../config/config');
 let authCodes;
@@ -26,11 +25,10 @@ router.post('/Reg',(req,res)=>{
     config.db.end();
     return;
    }else if(len==0){
-     let nowTime = sd.format(new Date())
-    config.db.query("insert into user (use_name,use_password,use_email,use_register_time) values(?,?,?,?)", [user.name,user.password,user.email,nowTime],(errs,result,fields) =>{
+    config.db.query("insert into user (use_name,use_password,use_email) values(?,?,?)", [user.name,user.password,user.email],(errs,result,fields) =>{
        if (errs!=null){
          console.log(errs)
-         res.json({status:"要被玩坏了"})
+         config.db.end();
        }
        console.log(result);
         req.session.user ={
@@ -38,6 +36,7 @@ router.post('/Reg',(req,res)=>{
           password :user.password,
         }
          res.redirect("http://localhost:3000/");
+         config.db.end();
          return;
        
      });

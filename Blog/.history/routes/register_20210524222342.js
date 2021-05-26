@@ -1,5 +1,4 @@
  var express = require('express');
- var sd = require('silly-datetime');
 var router = express.Router();
 var config = require('../config/config');
 let authCodes;
@@ -16,7 +15,7 @@ router.post('/Reg',(req,res)=>{
     res.json({status:"验证码不正确"})
     return;
   }
-  config.db.query("select use_name from user where use_name = ?",[user.name],(err,results,fields) =>{
+  config.db.query("select name from user where name = ?",[user.name],(err,results,fields) =>{
   if (err!=null){
     console.log(err)
   }
@@ -26,20 +25,21 @@ router.post('/Reg',(req,res)=>{
     config.db.end();
     return;
    }else if(len==0){
-     let nowTime = sd.format(new Date())
-    config.db.query("insert into user (use_name,use_password,use_email,use_register_time) values(?,?,?,?)", [user.name,user.password,user.email,nowTime],(errs,result,fields) =>{
+    config.db.query("insert into user (name,password,mobile) values(?,?,?)", [user.name,user.password,user.email],(errs,result,fields) =>{
        if (errs!=null){
          console.log(errs)
-         res.json({status:"要被玩坏了"})
+         config.db.end();
        }
        console.log(result);
+       if (result.protocol41){
         req.session.user ={
           name :user.name,
           password :user.password,
         }
          res.redirect("http://localhost:3000/");
+         config.db.end();
          return;
-       
+       }
      });
    }
   });

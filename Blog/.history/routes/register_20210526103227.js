@@ -26,11 +26,9 @@ router.post('/Reg',(req,res)=>{
     config.db.end();
     return;
    }else if(len==0){
-     let nowTime = sd.format(new Date())
-    config.db.query("insert into user (use_name,use_password,use_email,use_register_time) values(?,?,?,?)", [user.name,user.password,user.email,nowTime],(errs,result,fields) =>{
+    config.db.query("insert into user (use_name,use_password,use_email,use_register_time) values(?,?,?,?)", [user.name,user.password,user.email],(errs,result,fields) =>{
        if (errs!=null){
          console.log(errs)
-         res.json({status:"要被玩坏了"})
        }
        console.log(result);
         req.session.user ={
