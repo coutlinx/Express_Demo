@@ -10,7 +10,7 @@ config.db.query("select * from essay order by article_date DESC LIMIT 10",(err,r
     console.log(err)
   }else{
     for(let i in results){
-      results[i].article_date = sd.format(results[i].article_date,'YYYY-MM-DD')
+      results[i].article_date = sd.format(new Date(),results[i].article_date,'YYY-MM-DD')
     }
     console.log(results);
     

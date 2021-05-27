@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,6 @@
   <link rel="stylesheet" href="/stylesheets/me.css" th:href="@{/css/me.css}">
   <link rel="stylesheet" href="/stylesheets/timeline.css" th:href="@{/css/timeline.css}">
 </head>
-
 <body>
 
   <!--导航-->
@@ -19,22 +17,20 @@
       <div class="ui inverted secondary stackable menu">
         <h2 class="ui olive header item" style="font-family: STSong">LINX</h2>
         <!--<div class="right m-item item m-mobile-hide">-->
-        <a href="http://localhost:3000/" class="m-item item m-mobile-hide "><i class="home icon"></i>首页</a>
-        <a href="http://localhost:3000/types" class="m-item item m-mobile-hide"><i class="clone outline icon"></i>分类</a>
-        <a href="http://localhost:3000/archives" class="active m-item item m-mobile-hide"><i
-            class="clock icon"></i>时间轴</a>
-        <a href="http://localhost:3000/music" class="m-item item m-mobile-hide"><i class="music icon"></i>音乐盒</a>
-        <a href="http://localhost:3000/message" class="m-item item m-mobile-hide"><i class="book icon"></i>留言板</a>
-        <a href="http://localhost:3000/friends" class="m-item item m-mobile-hide"><i
-            class="pencil alternate icon"></i>友人帐</a>
-        <a href="http://localhost:3000/picture" class="m-item item m-mobile-hide"><i class="image icon"></i>照片墙</a>
-        <a href="http://localhost:3000/login" class="m-item item m-mobile-hide"><i class="image icon"></i>登入</a>
-        <a href="http://localhost:3000/about" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+          <a href="http://localhost:3000/" class="m-item item m-mobile-hide "><i class="home icon"></i>首页</a>
+          <a href="http://localhost:3000/types" class="m-item item m-mobile-hide"><i class="clone outline icon"></i>分类</a>
+          <a href="http://localhost:3000/archives" class="active m-item item m-mobile-hide"><i class="clock icon"></i>时间轴</a>
+          <a href="http://localhost:3000/music" class="m-item item m-mobile-hide"><i class="music icon"></i>音乐盒</a>
+          <a href="http://localhost:3000/message" class="m-item item m-mobile-hide"><i class="book icon"></i>留言板</a>
+          <a href="http://localhost:3000/friends" class="m-item item m-mobile-hide"><i class="pencil alternate icon"></i>友人帐</a>
+          <a href="http://localhost:3000/picture" class="m-item item m-mobile-hide"><i class="image icon"></i>照片墙</a>
+          <a href="http://localhost:3000/login" class="m-item item m-mobile-hide"><i class="image icon"></i>登入</a>
+          <a href="http://localhost:3000/about" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
         <!--</div>-->
         <div class="right m-item item m-mobile-hide">
           <form name="search" action="#" method="post" target="_blank">
             <div class="ui icon transparent input m-margin-tb-tiny" style="color: white">
-              <input style="color: white" type="text" name="query" placeholder="Search....">
+              <input style="color: white" type="text" name="query" placeholder="Search...." >
               <i onclick="document.forms['search'].submit()" class="search link icon"></i>
             </div>
           </form>
@@ -46,24 +42,23 @@
     </a>
   </nav>
 
-  <!--时间轴内容-->
+<!--时间轴内容-->
   <div class="doc-container m-padded-tb-massivex m-opacity" id="doc-container">
-    <th:block>
-      <section class="timeline">
-        <ul>
-          <% for(let i of data){
-              %>
-          <li class="">
-            <div>
-              <time><%= i.article_date %></time>
-              <div class="scientist">
-                <a href="#" target="_blank">
-                  <h3 class="state" style="text-align:center;font-size: 16px;color: #000;"><%= i.article_title %></h3>
-                </a>
+      <th:block >
+        <section class="timeline">
+          <ul>
+            <% for (let i of data){%>
+            <li class="" >
+              <div>
+                <time>i.article_date</time>
+                <div class="scientist" >
+                    <a href="#" target="_blank">
+                      <h3 class="state" style="text-align:center;font-size: 16px;color: #000;">i.article_title</h3>
+                    </a>
+                </div>
               </div>
-            </div>
-          </li>
-          <%}%>
+            </li>
+            <%}%>
           </ul>
         </section>
       </th:block>
