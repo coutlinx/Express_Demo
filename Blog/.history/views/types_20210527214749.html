@@ -18,28 +18,24 @@
   function Newpage(){
       $.ajax({
         type:"POST",
-        url:"http://localhost:3000/types/mapleleft",
+        URL:"http://localhost:3000/types/maple_left",
         success:function(data){
           console.log(data);
+         
+        
         } 
         })
   }
   function Newclassfiy(e){
-               let classfiy =e.innerHTML;
+    let classfiy =e.innerHTML;
               $.ajax({
                 type:"POST",
-                url:"http://localhost:3000/types/newclassfiy",
+                url:"http://localhost:3000/types/Type",
                 data:{Type:classfiy},
                 success:function(data){
-                  $("#title")[0].innerHTML= data.article_title;
-                  $("#content")[0].innerHTML= data.article_content;
-                  $("#date")[0].innerHTML= data.article_date;
-                  $("#comment_count")[0].innerHTML= data.article_comment_count;
-                  $("#classify")[0].innerHTML= data.article_classify;
-                  // $("#photo")[0].value= data.article_classify;
+                   console.log(data);
                 }
               })
-         
   }
 </script>
 <!--导航-->
@@ -94,10 +90,10 @@
     <div class="ui segment m-padded-tb-large m-opacity">
       <div class="ui container" align="center">
         <div class="ui labeled button m-margin-tb-tiny">
-          <a href="#" class="ui basic  button" onclick="Newclassfiy(this)">好文</a>
-          <a href="#" class="ui basic  button" onclick="Newclassfiy(this)">go</a>
-          <a href="#" class="ui basic  button" onclick="Newclassfiy(this)">c++</a>
-          <a href="#" class="ui basic  button" onclick="Newclassfiy(this)">java</a>
+          <a href="" class="ui basic  button" onclick="Newclassfiy(this)">好文</a>
+          <a href="" class="ui basic  button" onclick="Newclassfiy(this)">go</a>
+          <a href="" class="ui basic  button" onclick="Newclassfiy(this)">c++</a>
+          <a href="" class="ui basic  button" onclick="Newclassfiy(this)">java</a>
           <div class="ui basic  left pointing label">...</div>
         </div>
       </div>
@@ -109,8 +105,8 @@
           <div class="ui padded vertical segment m-padded-tb-large">
             <div class="ui middle aligned mobile reversed stackable grid" >
               <div class="eleven wide column">
-                <h3 class="ui header" ><a href="#" id="title"><%= i.article_title %></a></h3>
-                <p class="m-text" id="content"><%=i.article_content%>......</p>
+                <h3 class="ui header" ><a href="#"><%= i.article_title %></a></h3>
+                <p class="m-text"><%=i.article_content%>......</p>
                 <div class="ui grid">
                   <div class="eleven wide column">
                     <div class="ui mini horizontal link list">
@@ -119,18 +115,18 @@
                         <div class="content"><a href="#" target="_blank" class="header">oneStar</a></div>
                       </div>
                       <div class="item">
-                        <i class="calendar icon" ></i><span id="date"><%=i.article_date %></span>
+                        <i class="calendar icon"></i><span><%=i.article_date %></span>
                       </div>
                       <div class="item">
-                        <i class="eye icon" ></i> <span id="view"><%=i.article_views %></span>
+                        <i class="eye icon"></i> <span><%=i.article_views %></span>
                       </div>
                       <div class="item">
-                        <i class="comment outline icon" ></i> <span id="comment_count"><%=i.article_comment_count %></span>
+                        <i class="comment outline icon"></i> <span><%=i.article_comment_count %></span>
                       </div>
                     </div>
                   </div>
                   <div class="right aligned five wide column">
-                    <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" id="classify"><%=i.article_classify %></a>
+                    <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin"><%=i.article_classify %></a>
                   </div>
                 </div>
               </div>
@@ -144,6 +140,8 @@
             </div>
           </div>
         </div>
+    
+    
       <%}%>
 
     <!--分页-->

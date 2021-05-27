@@ -46,7 +46,7 @@ router.post('/newclassfiy',function(req,res){
       }else{
           
           console.log(results)
-          res.json({new:results})
+          res.json({new:newdata})
       }
     });
 
