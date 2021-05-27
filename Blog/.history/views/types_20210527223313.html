@@ -31,7 +31,7 @@
                 url:"http://localhost:3000/types/newclassfiy",
                 data:{Type:classfiy},
                 success:function(data){
-                  $("#title")[0].innerHTML= data.article_title;
+                  $("#title")[0].innerText= data.article_title;
                   $("#content")[0].innerHTML= data.article_content;
                   $("#date")[0].innerHTML= data.article_date;
                   $("#comment_count")[0].innerHTML= data.article_comment_count;
