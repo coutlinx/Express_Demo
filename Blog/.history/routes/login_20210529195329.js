@@ -22,9 +22,6 @@ router.post('/Log',(req,res) =>{
         if (err!=null){
           console.log(err)
         }
-        if  (results.length = undefined){
-          return;
-        }
         let len  = results.length;
         if(len >0){
           req.session.user ={
