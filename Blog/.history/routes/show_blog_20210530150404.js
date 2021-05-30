@@ -10,7 +10,7 @@ router.get('/:?', function(req, res, next) {
     }else if(results.length != undefined){
       res.render('show_blog',{html:results[0].article_html});
     }else{
-      res.render('show_blog',{html:"<p>这篇文章好像被删除了，访问别的吧！</p>"});
+      return;
     }
   })
   
