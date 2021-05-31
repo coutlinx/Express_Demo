@@ -57,7 +57,6 @@ app.use('/admin/picture',adpictuerRouter);
 app.use('/admin/blogs/input',inputBlogRouter);
 app.use('/search',searchRouter);
 app.use('/showBlog',shwoBlogRouter);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
