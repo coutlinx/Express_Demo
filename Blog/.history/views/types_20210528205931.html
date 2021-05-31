@@ -9,39 +9,7 @@
   <link rel="stylesheet" href="/stylesheets/me.css" th:href="@{/css/me.css}">
 </head>
 <body>
-<script>
 
-  function Type(e){
-    let name = e.delegateTarget.parentElement.value;
-    console.log(name)
-  }
-  function Newpage(){
-      $.ajax({
-        type:"POST",
-        url:"http://localhost:3000/types/mapleleft",
-        success:function(data){
-          console.log(data);
-        } 
-        })
-  }
-  function Newclassfiy(e){
-               let classfiy =e.innerHTML;
-              $.ajax({
-                type:"POST",
-                url:"http://localhost:3000/types/newclassfiy",
-                data:{Type:classfiy},
-                success:function(data){
-                  $("#title")[1].value= data.article_title;
-                  $("#content")[1].value= data.article_content;
-                  $("#date")[1].value= data.article_date;
-                  $("#comment_count")[1].value= data.article_comment_count;
-                  $("#classify")[1].value= data.article_classify;
-                  // $("#photo")[0].value= data.article_classify;
-                }
-              })
-         
-  }
-</script>
 <!--导航-->
 
 
@@ -91,22 +59,17 @@
 <!--中间内容-->
 <div  class="m-margin- animated fadeIn">
   <div class="ui container">
-
-    
     <div class="ui segment m-padded-tb-large m-opacity">
       <div class="ui container" align="center">
-      
         <div class="ui labeled button m-margin-tb-tiny">
-                <% for(let i of datas){
-      %>
-          <a href="#" class="ui basic  button" onclick="Newclassfiy(this)"><%=i.sort_name%></a>
-           <%}%>
+          <a href="#" class="ui basic  button" onclick="Newclassfiy(this)">好文</a>
+          <a href="#" class="ui basic  button" onclick="Newclassfiy(this)">go</a>
+          <a href="#" class="ui basic  button" onclick="Newclassfiy(this)">c++</a>
+          <a href="#" class="ui basic  button" onclick="Newclassfiy(this)">java</a>
           <div class="ui basic  left pointing label">...</div>
         </div>
-         
       </div>
     </div>
-  
 
     <% for(let i of datil){
       %>
@@ -286,6 +249,39 @@
         $('.m-item').toggleClass('m-mobile-hide');
     });
 
+</script>
+<script>
+
+  function Type(e){
+    let name = e.delegateTarget.parentElement.value;
+    console.log(name)
+  }
+  function Newpage(){
+      $.ajax({
+        type:"POST",
+        url:"http://localhost:3000/types/mapleleft",
+        success:function(data){
+          console.log(data);
+        } 
+        })
+  }
+  function Newclassfiy(e){
+               let classfiy =e.innerHTML;
+              $.ajax({
+                type:"POST",
+                url:"http://localhost:3000/types/newclassfiy",
+                data:{Type:classfiy},
+                success:function(data){
+                  $("#title")[1].value= data.article_title;
+                  $("#content")[1].value= data.article_content;
+                  $("#date")[1].value= data.article_date;
+                  $("#comment_count")[1].value= data.article_comment_count;
+                  $("#classify")[1].value= data.article_classify;
+                  // $("#photo")[0].value= data.article_classify;
+                }
+              })
+         
+  }
 </script>
 </body>
 </html>

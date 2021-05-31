@@ -6,19 +6,18 @@ var data=require('../config/config');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  let datil,datas;
   data.db.query("select * from essay where article_classify ='好文' ORDER BY article_id LIMIT 0,5",(err,results,fields)=>{
     if (err !=null){
       console.log(err);
     }else{
-      datil = results;
+      // console.log(results)
+       res.render('types',{datil:results})
        data.db.query("select * from article_classification ORDER BY sort_id LIMIT 0,5",(err,results,fields)=>{
         if(err !=null){
           console.log(err)
         }else{
-          datas = results;
-          res.render("types",{datil:datil,datas:datas});
-
+      console.log(results);
+      res.render('types',{data:results})
     }
       })
     }

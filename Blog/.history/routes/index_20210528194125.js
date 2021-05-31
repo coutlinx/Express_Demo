@@ -12,7 +12,7 @@ router.get('/', function(req, res, next){
     console.log(err);
   }else{
     // console.log(results)
-     res.render('index',{datil:results})
+     res.render('types',{datil:results})
   }
 })
  }

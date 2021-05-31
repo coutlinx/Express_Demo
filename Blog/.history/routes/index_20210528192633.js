@@ -7,15 +7,15 @@ router.get('/', function(req, res, next){
   if (req.session.user == undefined){
     res.redirect("http://localhost:3000/login")
       }else{
- data.db.query("select * from essay ORDER BY article_id LIMIT 0,5",(err,results,fields)=>{
-  if (err !=null){
-    console.log(err);
-  }else{
-    // console.log(results)
-     res.render('index',{datil:results})
-  }
-})
+        res.render('index');
  }
 
+  data.db.query("select * from essay ORDER BY article_id LIMIT 0,5"),(err,results)=>{
+    if(err!= null){
+      console.log(err)
+    }else{
+      res.render('index',{datil:results});
+    }
+  }
 });
 module.exports = router;

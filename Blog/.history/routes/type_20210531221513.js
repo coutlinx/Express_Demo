@@ -6,7 +6,7 @@ var data=require('../config/config');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  let datil,datas;
+  let datil,data;
   data.db.query("select * from essay where article_classify ='好文' ORDER BY article_id LIMIT 0,5",(err,results,fields)=>{
     if (err !=null){
       console.log(err);
@@ -16,9 +16,7 @@ router.get('/', function(req, res, next) {
         if(err !=null){
           console.log(err)
         }else{
-          datas = results;
-          res.render("types",{datil:datil,datas:datas});
-
+          data = results;
     }
       })
     }
