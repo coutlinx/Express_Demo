@@ -6,7 +6,7 @@ let dbConfig = {
   port: "3306",
   user: "root",
   password: "121",
-  database: "demo",
+  database: "blog",
 };
 
 let users = {
@@ -101,7 +101,7 @@ function getArticle(callback) {
     Time,
     Type = [];
   db.query(
-    "select article_id,article_title,article_date,article_types,article_recommend,article_status FROM `essay` ORDER BY article_id LIMIT 0,10",
+    "select article_id,article_title,article_date,article_types,article_recommend,article_status FROM `文章表` ORDER BY article_id LIMIT 0,10",
     (err, results, fields) => {
       callback(err, results);
     }
@@ -135,5 +135,5 @@ module.exports = {
   getArticle,
   HasSession,
   article: article,
-  DeletArticle,
+  DeletArticle
 };
