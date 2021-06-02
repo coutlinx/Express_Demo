@@ -258,9 +258,8 @@
         success:function(data){
           console.log(data);
           console.log($("tbody"));
-          
           let innerHTML = [];
-          for(let i of data.data){
+          for(let i of data){
              inner = `
             <tr align="center">
                         <td>${i.article_id}</td>
@@ -279,18 +278,11 @@
             innerHTML.push(inner);
           }
           for(let i in $("tbody")){
-            if($("tbody")[i] == undefined){
-              break;
-            }
             if (innerHTML[i] != undefined){
-              $("tbody")[i].innerHTML = innerHTML[i]
+              $("tbody")[i] = innerHTML[i]
             }else{
-            $("tbody")[i].innerHTML = "";
-          }
-          if  ($("tbody")[4].innerHTML == "" && innerHTML == []){
-            alert("没有更多的了")
-            return;
-          }
+              $("tbody")[i].parentElement.removeChild($("tbody")[i]);
+            }
           }
         }
       })

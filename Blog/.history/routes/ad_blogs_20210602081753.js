@@ -93,7 +93,7 @@ router.post("/compile",(req,res)=>{
 })
 router.post("/search",(req,res)=>{
   req.body.title = "%"+req.body.title+"%"
-  config.db.query("select * from essay where article_classify =  ? and article_title like ?",[req.body.id,req.body.title],(err,restult,fild)=>{
+  config.db.query("select * from essay where article_classify = (select sort_name from classify where id = ?) and article_title like ?",[req.body.id,req.body.title],(err,restult,fild)=>{
     if(err != null){
       console.log(err);
     }else{
@@ -110,7 +110,6 @@ router.get("/search",(req,res)=>{
         icon: config.users.icon,
         article: config.article,
         classify:""})
-        return;
     }
     for (let i = 0; i < req.session.data.length; i++) {
       if (req.session.data[i].article_recommend == "true") {
@@ -129,7 +128,6 @@ router.get("/search",(req,res)=>{
       icon: config.users.icon,
       article: config.article,
       classify:req.session.data})
-      return;
   }else{
     res.redirect("http://localhost:3000/admin/blogs")
   }

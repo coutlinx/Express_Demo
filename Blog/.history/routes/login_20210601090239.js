@@ -23,11 +23,11 @@ router.post('/Log',(req,res) =>{
           console.log(err)
         }
         let arr = results;
-        if (arr == []){
+        if (results == []){
           res.json({status:"账号或密码错误!"});
           return
         }
-        let len  = arr.length;
+        let len  = results.length;
         if(len >0){
           req.session.user ={
             name :user.name,

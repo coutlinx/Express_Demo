@@ -258,7 +258,10 @@
         success:function(data){
           console.log(data);
           console.log($("tbody"));
-          
+          if(data.data.length == 0){
+            $("tbody")[i].parentElement.removeChild($("tbody")[i]);
+            return;
+          }
           let innerHTML = [];
           for(let i of data.data){
              inner = `
@@ -279,18 +282,9 @@
             innerHTML.push(inner);
           }
           for(let i in $("tbody")){
-            if($("tbody")[i] == undefined){
-              break;
-            }
             if (innerHTML[i] != undefined){
-              $("tbody")[i].innerHTML = innerHTML[i]
-            }else{
-            $("tbody")[i].innerHTML = "";
-          }
-          if  ($("tbody")[4].innerHTML == "" && innerHTML == []){
-            alert("没有更多的了")
-            return;
-          }
+              $("tbody")[i] = innerHTML[i]
+            }
           }
         }
       })

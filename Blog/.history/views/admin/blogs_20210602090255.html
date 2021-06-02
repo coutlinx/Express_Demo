@@ -283,11 +283,11 @@
               break;
             }
             if (innerHTML[i] != undefined){
-              $("tbody")[i].innerHTML = innerHTML[i]
+              $("tbody")[i] = innerHTML[i]
             }else{
             $("tbody")[i].innerHTML = "";
           }
-          if  ($("tbody")[4].innerHTML == "" && innerHTML == []){
+          if  ($("tbody")[4].innerHTML == ""){
             alert("没有更多的了")
             return;
           }

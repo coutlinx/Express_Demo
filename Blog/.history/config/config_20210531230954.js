@@ -101,7 +101,7 @@ function getArticle(callback) {
     Time,
     Type = [];
   db.query(
-    "select article_id,article_title,article_date,article_classify,article_recommend,article_status FROM `essay` ORDER BY article_id LIMIT 0,10",
+    "select article_id,article_title,article_date,article_classfiy,article_recommend,article_status FROM `essay` ORDER BY article_id LIMIT 0,10",
     (err, results, fields) => {
       callback(err, results);
     }

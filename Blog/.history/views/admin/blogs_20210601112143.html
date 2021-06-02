@@ -245,8 +245,8 @@
   <script>
       // $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
     $("#search-btn").click(function(){
-      let title = this.parentElement.parentElement.children[0].children[0].value;
-      let id = this.parentElement.parentElement.children[1].children[0].children[0].children[2].innerHTML;
+      let title = this.parentElement.parentElement.children[0].children[0].innerHTML;
+      let id = this.parentElement.parentElement.children[1].value;
       $.ajax({
         url:"/admin/blogs/search",
         method:"post",
@@ -256,42 +256,8 @@
           console.log(data)
         },
         success:function(data){
-          console.log(data);
-          console.log($("tbody"));
-          
-          let innerHTML = [];
-          for(let i of data.data){
-             inner = `
-            <tr align="center">
-                        <td>${i.article_id}</td>
-                        <td> ${i.article_title} </td>
-                        <td> ${i.article_classify} </td>
-                        <td> ${i.article_recommend} </td>
-                        <td> ${i.article_status} </td>
-                        <td> ${i.article_date}</td>
-                        <td>
-                          <a href="#" class="ui mini teal basic button complie">编辑</a>
-                          <a href="#" onclick="return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')"
-                            class="ui mini delet red basic button">删除</a>
-                        </td>
-                      </tr>
-            `
-            innerHTML.push(inner);
-          }
-          for(let i in $("tbody")){
-            if($("tbody")[i] == undefined){
-              break;
-            }
-            if (innerHTML[i] != undefined){
-              $("tbody")[i].innerHTML = innerHTML[i]
-            }else{
-            $("tbody")[i].innerHTML = "";
-          }
-          if  ($("tbody")[4].innerHTML == "" && innerHTML == []){
-            alert("没有更多的了")
-            return;
-          }
-          }
+          alert(1)
+          console.log(data)
         }
       })
     })

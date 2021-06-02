@@ -279,17 +279,11 @@
             innerHTML.push(inner);
           }
           for(let i in $("tbody")){
-            if($("tbody")[i] == undefined){
-              break;
-            }
             if (innerHTML[i] != undefined){
-              $("tbody")[i].innerHTML = innerHTML[i]
+              $("tbody")[i] = innerHTML[i]
             }else{
-            $("tbody")[i].innerHTML = "";
-          }
-          if  ($("tbody")[4].innerHTML == "" && innerHTML == []){
-            alert("没有更多的了")
-            return;
+            $("tbody")[i].parentElement.removeChild($("tbody")[i]);
+            
           }
           }
         }

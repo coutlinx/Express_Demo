@@ -62,25 +62,25 @@
     <div class="ui container">
       <div class="ui secondary segment form">
         <input type="hidden" name="page">
-        <form>
-          <div class="inline fields">
-            <div class="field">
-              <input type="text" name="title" placeholder="标题">
-            </div>
-            <div class="field">
-              <div class="ui labeled action input">
-                <div class="ui type selection dropdown">
-                  <input type="hidden" name="typeId">
-                  <i class="dropdown icon"></i>
-                  <div class="default text">分类</div>
-                  <div class="menu">
-                    <%for(let i of classify) {%>
-                    <div class="item" data-value="<%= i.id%>"> <%=i.sort_name%> </div>
-                    <%}%>
+        <div class="inline fields">
+          <div class="field">
+            <input type="text" name="title" placeholder="标题">
+          </div>
+          <div class="field">
+            <div class="ui labeled action input">
+              <div class="ui type selection dropdown">
+                <input type="hidden" name="typeId">
+                <i class="dropdown icon"></i>
+                <div class="default text">分类</div>
+                <div class="menu">
+                  <%for(let i of classify) {%>
+                  <div class="item" data-value="<%= i.id%>"> <%=i.sort_name%> </div>
+                  <%}%>
                 </div>
               </div>
               <button id="clear-btn" class="ui compact button">clear</button>
-            </div> 
+            </div>
+
           </div>
           <!--<div class="field">-->
           <!--<div class="ui checkbox">-->
@@ -88,11 +88,13 @@
           <!--<label for="recommend">推荐</label>-->
           <!--</div>-->
           <!--</div>-->
+          <form action="/search" method="GET">
             <div class="field">
               <button type="button" id="search-btn" class="ui mini teal basic button"><i
                   class="search icon"></i>搜索</button>
             </div> 
           </form>
+            
         </div>
       </div>
       <div id="table-container">
@@ -110,24 +112,24 @@
           </thead>
           <%for(let i of article){
           %>
-                    <tbody>
-                      <tr align="center">
-                        <td><%= i.article_id %></td>
-                        <td><%= i.article_title %></td>
-                        <td><%= i.article_classify %></td>
-                        <td><%= i.article_recommend %></td>
-                        <td><%= i.article_status %></td>
-                        <td><%= i.article_date%></td>
-                        <td>
-                          <!--th:href="@{/admin/types/{id}/input(id=${type.id})}"-->
-                          <a href="#" class="ui mini teal basic button complie">编辑</a>
-                          <a href="#" onclick="return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')"
-                            class="ui mini delet red basic button">删除</a>
-                        </td>
-                      </tr>
-                    </tbody>
+          <tbody>
+            <tr align="center">
+              <td><%= i.article_id %></td>
+              <td><%= i.article_title %></td>
+              <td><%= i.article_classify %></td>
+              <td><%= i.article_recommend %></td>
+              <td><%= i.article_status %></td>
+              <td><%= i.article_date%></td>
+              <td>
+                <!--th:href="@{/admin/types/{id}/input(id=${type.id})}"-->
+                <a href="#" class="ui mini teal basic button complie">编辑</a>
+                <a href="#" onclick="return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')" class="ui mini delet red basic button"
+                  >删除</a>
+              </td>
+            </tr>
+          </tbody>
 
-                    <%}%>
+          <%}%>
           <tfoot>
           <tr>
             <th colspan="7">
@@ -244,57 +246,7 @@
 
   <script>
       // $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
-    $("#search-btn").click(function(){
-      let title = this.parentElement.parentElement.children[0].children[0].value;
-      let id = this.parentElement.parentElement.children[1].children[0].children[0].children[2].innerHTML;
-      $.ajax({
-        url:"/admin/blogs/search",
-        method:"post",
-        type:"json",
-        data:{title:title,id:id},
-        error:function(data){
-          console.log(data)
-        },
-        success:function(data){
-          console.log(data);
-          console.log($("tbody"));
-          
-          let innerHTML = [];
-          for(let i of data.data){
-             inner = `
-            <tr align="center">
-                        <td>${i.article_id}</td>
-                        <td> ${i.article_title} </td>
-                        <td> ${i.article_classify} </td>
-                        <td> ${i.article_recommend} </td>
-                        <td> ${i.article_status} </td>
-                        <td> ${i.article_date}</td>
-                        <td>
-                          <a href="#" class="ui mini teal basic button complie">编辑</a>
-                          <a href="#" onclick="return confirm('确定要删除该文章吗？三思啊! 删了可就没了！')"
-                            class="ui mini delet red basic button">删除</a>
-                        </td>
-                      </tr>
-            `
-            innerHTML.push(inner);
-          }
-          for(let i in $("tbody")){
-            if($("tbody")[i] == undefined){
-              break;
-            }
-            if (innerHTML[i] != undefined){
-              $("tbody")[i].innerHTML = innerHTML[i]
-            }else{
-            $("tbody")[i].innerHTML = "";
-          }
-          if  ($("tbody")[4].innerHTML == "" && innerHTML == []){
-            alert("没有更多的了")
-            return;
-          }
-          }
-        }
-      })
-    })
+
       // 运行时间统计
       function secondToDate(second) {
           if (!second) {
@@ -386,23 +338,22 @@
           .dropdown('clear');
       });
 
-    // function page(obj) {
-    //   $("[name='page']").val($(obj).data("page"));
-    //   loaddata();
-    // }
+    function page(obj) {
+      $("[name='page']").val($(obj).data("page"));
+      loaddata();
+    }
 
-    // $("#search-btn").click(function () {
-    //   $("[name='page']").val(0);
-    //   // loaddata();
-    // });
-
-    // function loaddata() {
-    //   $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search",{
-    //     title : $("[name='title']").val(),
-    //     typeId : $("[name='typeId']").val(),
-    //     page : $("[name='page']").val()
-    //   });
-    // }
+    $("#search-btn").click(function () {
+      $("[name='page']").val(0);
+      loaddata();
+    });
+    function loaddata() {
+      $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search",{
+        title : $("[name='title']").val(),
+        typeId : $("[name='typeId']").val(),
+        page : $("[name='page']").val()
+      });
+    }
     $("#delet").click((e)=>{
       let id = e.delegateTarget.parentElement.parentElement.children[0].innerHTML;
       $.ajax({
