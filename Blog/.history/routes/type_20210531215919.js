@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
        res.render('types',{datil:results})
     }
   })
-  data.db.query("select * from article_classification ORDER BY sort_id LIMIT 0,5",(err,results,fields)=>{
+  data.db.query("select * from classify ORDER BY sort_id LIMIT 0,5",(err,results,fields)=>{
         if(err !=null){
           console.log(err)
         }else{

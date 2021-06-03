@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
     }
   });
 
-  data.db.query("select sort_name from article_classification ORDER BY article_id LIMIT 0,5 ",(err,results,fild)=>{
+  data.db.query("select sort_name from classify ORDER BY article_id LIMIT 0,5 ",(err,results,fild)=>{
     if(err !=null){
       console.log(err)
     }else{
