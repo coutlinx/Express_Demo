@@ -49,7 +49,7 @@ router.post('/select',(req,res)=>{
 });
 })
 router.post('/newpage',(req,res)=>{
-  let i;
+  let i ;
   let k=0;
   let j=5;
   console.log(req.body.before)
@@ -58,7 +58,7 @@ router.post('/newpage',(req,res)=>{
     if(err !=null){
       console.log(err);
     }else{
-   res.json({datai:results})
+  res.json({datai:results})
     }
   })
   }else if(i==req.body.after){

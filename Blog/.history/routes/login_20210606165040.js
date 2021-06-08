@@ -18,7 +18,7 @@ router.post('/Log',(req,res) =>{
       admin = true;
     }
     if (!admin){
-      db.db.query("select use_name from user where use_name = ? or and use_password = ?",[user.name,user.password],(err,results,fields) =>{
+      db.db.query("select use_name from user where use_name = ? or and use_password = ?",[user.name,,user.password],(err,results,fields) =>{
         if (err!=null){
           console.log(err)
         }

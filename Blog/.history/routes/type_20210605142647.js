@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
       console.log(err);
     }else{
       datil = results;
-       data.db.query("select * from classify ORDER BY id LIMIT 0,5",(err,results,fields)=>{
+       data.db.query("select * from classify ORDER BY sort_id LIMIT 0,5",(err,results,fields)=>{
         if(err !=null){
           console.log(err)
         }else{
@@ -35,16 +35,14 @@ router.post('/Class',(req,res)=>{
   })
 });
 
- router.post('/newpage',function(req,res){
-        let i;  
-        var before=req.body.before;
-        var newnext=req.body.next;
-        let k=0 ;
+router.post('/mapleleft',function(req,res,next){
+       let i;  
+        let before=req.body.before;
+        let newnext=req.body.next;
+        let k=0;
         let l=5;
         if(i ==before){
-          k=k+5
-          l=l+5
-          data.db.query("select * from essay  ORDER BY article_id LIMIT ?,?",[k,l+5],(err,results)=>{
+          config.db("select * from essay  ORDER BY article_id LIMIT ?,?",[k+5,l+5],(err,results)=>{
             if(err!=null){
               console.log(err);
             }else{
@@ -52,9 +50,7 @@ router.post('/Class',(req,res)=>{
             }
           })
         }else if( i==newnext){
-          k=k-5
-          l=l-5
-          data.db.query("select * from essay  ORDER BY article_id LIMIT ?,?",[k,l],(err,results)=>{
+          config.db("select * from essay  ORDER BY article_id LIMIT ?,?",[k-5,l-5],(err,results)=>{
             if(err!=null){
               console.log(err);
             }else{
@@ -70,8 +66,9 @@ router.post('/newclassfiy',function(req,res){
       if (err !=null){
         console.log(err);
       }else{
+          
           console.log(results)
-          res.json({yy:results})
+          res.json({new:results})
       }
     });        
 })

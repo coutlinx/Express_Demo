@@ -49,16 +49,15 @@ router.post('/select',(req,res)=>{
 });
 })
 router.post('/newpage',(req,res)=>{
-  let i;
+  let i ;
   let k=0;
   let j=5;
-  console.log(req.body.before)
   if(i==req.body.before){
      db.db.query("select * from classify ORDER BY id LIMIT ?,?",[k+5,j+5],(err,results)=>{
     if(err !=null){
       console.log(err);
     }else{
-   res.json({datai:results})
+  res.json({datai:results})
     }
   })
   }else if(i==req.body.after){

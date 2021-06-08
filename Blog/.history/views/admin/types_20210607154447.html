@@ -65,8 +65,6 @@
         <input type="text" name="sortname" id="sortname" placeholder="分类名称">
         <button type="button" id="search-btn" class="ui mini teal basic button" onclick="Select()"><i
           class="search icon"></i>搜索</button>
-         <a href="http://localhost:3000/admin/types"><button type="button" id="search-btn" class="ui mini teal basic button" ><i
-            class="search icon"></i>清空</button> </a>
       </div>
 
       <table class="ui compact teal table">
@@ -95,17 +93,15 @@
             <th colspan="6" >
               <div class="ui inverted divided stackable grid">
                 <div class="three wide column" align="center">
-                  <a class="item" onclick="newpage()"id="before">上一页</a>
+                  <a class="item">上一页</a>
                 </div>
 
                 <div class="ten wide column" align="center">
-                  <p>/</p>
+                  <p>第 <span></span> 页，共 <span><></span> 页，有 <span></span> 个分类</p>
                 </div>
-               
-
 
                 <div class="three wide column" align="center">
-                  <a class="item" onclick="newpage()"id="after">下一页</a>
+                  <a class="item">下一页</a>
                 </div>
               </div>
               <div align="center">
@@ -273,10 +269,10 @@
       method:"post",
       url:"http://localhost:3000/admin/types/select",
       data:{sortid:sortid,sortname:sortname},
-      success:function(data){
-        console.log(data.datas);
+      success:function(n){
+        console.log(n.data);
         let inn=[]; 
-        for (let i of data.datas) {
+        for (let i of n.data) {
              nn=`
              <tbody>
           <tr align="center"> 
@@ -288,11 +284,12 @@
             </td>
           </tr>
         </tbody>
+             
              ` 
        
         inn.push(nn);
       } 
-       for(let i in $("tbody")){
+       for(let i in $("tbody")){a
             if($("tbody")[i] == undefined){
               break;
             }
@@ -300,6 +297,10 @@
               $("tbody")[i].innerHTML = inn[i]
             }else{
             $("tbody")[i].innerHTML = "";
+          }
+          if ($("tbody")[4].innerHTML == "" && innerHTML == []){
+            alert("没有更多的了")
+            return;
           }
           }
       }
@@ -319,18 +320,6 @@
     }
     })
   });
-function newpage(){
-  let before=$("#before").val();
-    let after=$("#after").val();
-  $.ajax({
-  method:"post",
-  url:"http://localhost:3000/admin/types/newpage",
-  data:{before:before,after:after},
-  success:function(data){
-             console.log(data)
-  }
-  })
-}
 
   </script>
 </body>
