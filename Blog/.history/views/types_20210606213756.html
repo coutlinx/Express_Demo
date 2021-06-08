@@ -78,7 +78,7 @@
 
     <% for(let i of datil){
       %>
-    <div class="ui top attached teal m-opacity segment ">
+    <div class="ui top attached teal m-opacity segment" id="classf">
           <div class="ui padded vertical segment m-padded-tb-large">
             <div class="ui middle aligned mobile reversed stackable grid" >
               <div class="eleven wide column">
@@ -281,13 +281,13 @@
                 success:function(yy){
                   console.log(yy.data);
                     let  com = [];
-                    for (let i of yy.data){
-                       cc=`
-            <div class="ui top attached teal m-opacity segment">
+                    for (let i of yy){
+                      let cc=`
+                      <div class="ui top attached teal m-opacity segment">
                   <div class="ui padded vertical segment m-padded-tb-large">
             <div class="ui middle aligned mobile reversed stackable grid" >
               <div class="eleven wide column">
-                <h3 class="ui header" ><a href="#" id="title">${i.article_title}</a></h3>
+                <h3 class="ui header" ><a href="#" id="title">${i.article_id}</a></h3>
                 <p class="m-text" id="content">${i.article_content}......</p>
                 <div class="ui grid">
                   <div class="eleven wide column">
@@ -318,24 +318,32 @@
                   <img src=" /images/${ i.article_photo}" alt="" class="ui rounded image">
                 </a>
               </div>
+    
             </div>
           </div>
-        </div>   
+        </div>
+                         
                       `
                       com.push(cc);
                     }
-                    console.log(com);
-          for(let i in $("segment")){
-            if (com[i] != undefined){
-              $("segment")[i].innerHTML =com[i]
+          for(let i in $("classf")){
+            if($("classf")[i] == undefined){
+              break;
+            }
+            if (innerHTML[i] != undefined){
+              $("classf")[i].innerHTML = innerHTML[i]
             }else{
-              $("segment")[i].innerHTML = "";
+            $("classf")[i].innerHTML = "";
           }
-    
+          if ($("classf")[4].innerHTML == "" && innerHTML == []){
+            alert("没有更多的了")
+            return;
           }
-     }
- })     
-}
+          }
+                }
+ })
+         
+  }
 
 </script>
 </body>

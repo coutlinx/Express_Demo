@@ -39,7 +39,7 @@ router.post('/Class',(req,res)=>{
         let i;  
         var before=req.body.before;
         var newnext=req.body.next;
-        let k=0 ;
+        let k=0 || k;
         let l=5;
         if(i ==before){
           k=k+5
@@ -71,7 +71,7 @@ router.post('/newclassfiy',function(req,res){
         console.log(err);
       }else{
           console.log(results)
-          res.json({yy:results})
+          res.json({datil:results})
       }
     });        
 })

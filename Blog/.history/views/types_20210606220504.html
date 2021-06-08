@@ -78,7 +78,7 @@
 
     <% for(let i of datil){
       %>
-    <div class="ui top attached teal m-opacity segment ">
+    <div class="ui top attached teal m-opacity segment classf">
           <div class="ui padded vertical segment m-padded-tb-large">
             <div class="ui middle aligned mobile reversed stackable grid" >
               <div class="eleven wide column">
@@ -274,6 +274,7 @@
   }
   function Newclassfiy(e){
                let classfiy =e.innerHTML;
+               let classf=document.getElementsByClassName("classf");
               $.ajax({
                 type:"POST",
                 url:"http://localhost:3000/types/newclassfiy",
@@ -325,17 +326,18 @@
                       com.push(cc);
                     }
                     console.log(com);
-          for(let i in $("segment")){
+          for(let i in $("classf")){
             if (com[i] != undefined){
-              $("segment")[i].innerHTML =com[i]
+              $("classf")[i].innerHTML =com[i]
             }else{
-              $("segment")[i].innerHTML = "";
+             $("classf")[i].innerHTML = "";
           }
     
           }
      }
- })     
-}
+ })
+         
+  }
 
 </script>
 </body>
