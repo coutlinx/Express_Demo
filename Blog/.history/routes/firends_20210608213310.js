@@ -8,11 +8,10 @@ router.get('/', function(req, res, next) {
   if(req.session.usename==undefined){
      res.redirect('login')
   }else{
-    db.db.query("select * from user_friends as u where u.use_id=(select user.use_id from user where use_name=?)",[req.session.usename],(err,results)=>{
+    db.db.query("select * from user_friends as u where u.useid=(select user.use_id from user where use_name=?)",[req.session.usename],(err,results)=>{
       if(err !=null){
         console.log(err)
       }else{
-        console.log(results);
          res.render('friends',{datail:results});
       }
     })

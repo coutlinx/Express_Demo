@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
       if(err !=null){
         console.log(err)
       }else{
-        console.log(results);
          res.render('friends',{datail:results});
       }
     })
