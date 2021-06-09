@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   if(req.session.usename==undefined){
      res.redirect('login')
   }else{
-    db.db.query("select * from user_friends as u where u.use_id=(select user.use_id from user where use_name=?) ORDER BY use_id LIMIT 0,5",[req.session.usename],(err,results)=>{
+    db.db.query("select * from user_friends as u where u.use_id=(select user.use_id from user where use_name=?) ORDER BY article_id LIMIT 0,5",[req.session.usename],(err,results)=>{
       if(err !=null){
         console.log(err)
       }else{
