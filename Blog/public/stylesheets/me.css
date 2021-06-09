@@ -462,11 +462,19 @@ body {
 }
 
 .friends-link {
+<<<<<<< HEAD
   width: 160px;
   height: 220px;
   border: 1px solid #999;
   box-shadow: 5px 5px 5px #999;
   border-radius: 8px;
+=======
+    width: 173px;
+    height: 320px;
+    border: 1px solid #999;
+    box-shadow: 5px 5px 5px #999;
+    border-radius: 8px;
+>>>>>>> ca76480a7a259d05536b081ef2d1a094dc6c62e3
 }
 
 .friends-link-image {
