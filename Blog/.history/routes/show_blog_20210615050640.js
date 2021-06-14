@@ -12,8 +12,8 @@ router.get("/:?", function (req, res, next) {
         console.log(err);
       } else if (results[0] != undefined && results[0].article_html != null) {
         let art = results[0];
-        let recommend = results[0].article_title
-        config.db.query("select * from essay where article_title like ?",[recommend],(err,results,fild)=>{
+        let recommend = results[0].article_title.substr(0,3)
+        config.db.query("select article_title from essay where article_title like ?",[recommend],(err,results,fild)=>{
           if(err != null){
             console.log(err)
           }else{

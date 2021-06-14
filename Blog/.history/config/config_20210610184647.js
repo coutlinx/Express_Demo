@@ -46,9 +46,6 @@ function Sendmaile(maile) {
   for (let i = 0; i < 6; i++) {
     code += parseInt(Math.random() * 10);
   }
-  if(code.length >6){
-    code  = "";
-  }
   mailTransport.sendMail(
     {
       from: "1402284023@qq.com",

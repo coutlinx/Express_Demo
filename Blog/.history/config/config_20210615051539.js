@@ -43,11 +43,11 @@ let mailTransport = nodemail.createTransport({
 let code = "";
 
 function Sendmaile(maile) {
+  if(code.length >=5){
+    code  = "";
+  }
   for (let i = 0; i < 6; i++) {
     code += parseInt(Math.random() * 10);
-  }
-  if(code.length >6){
-    code  = "";
   }
   mailTransport.sendMail(
     {

@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/Log',(req,res) =>{
   let admin = false;
-  req.session.usename=req.body.name
+  res.session.usename=req.body.name
   console.log(req.body);
   if(req.body.password==""||req.body.name==""){
     res.json({status:"请输入您的用户名或密码"});

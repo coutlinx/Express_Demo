@@ -65,19 +65,20 @@
 <!-- <script src="../assets/libs/particles/js/lib/stats.js"></script> -->
 <script>
 	function showtime(t) {
-		document.getElementById("auth").style.disabled = true;
+		document.myform.phone.disabled = true;
 		for (i = 1; i <= t; i++) {
 			window.setTimeout("update_p(" + i + "," + t + ")", i * 1000);
 		}
+
 	}
 
 	function update_p(num, t) {
 		if (num == t) {
-			document.getElementById("auth").innerHTML = " 重新发送 ";
-			document.getElementById("auth").style.disabled = false;
+			document.myform.phone.value = " 重新发送 ";
+			document.myform.phone.disabled = false;
 		} else {
 			printnr = t - num;
-			document.getElementById("auth").innerHTML = " (" + printnr + ")秒后重新发送";
+			document.myform.phone.value = " (" + printnr + ")秒后重新发送";
 		}
 	}
 	var count_particles, stats, update;
@@ -100,32 +101,26 @@
 </script>
 <script>
 	function auth(e) {
-		if (document.getElementById("auth").style.disabled) {
-			return;
-		} else {
-			showtime(30);
-			console.log(e.previousElementSibling.value);
-			let email = e.previousElementSibling.value;
-			let parten = /([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}/;
-			let s = parten.exec(email);
-			if (s == null) {
-				alert("请填写正确的邮箱")
-			}
-			console.log(s)
-			$.ajax({
-				url: "http://localhost:3000/register/auth",
-				method: "post",
-				data: {
-					email: email
-				},
-				success: function (data) {
-					console.log(data)
-				}
-
-
-			})
-
+		console.log(e.previousElementSibling.value);
+		let email = e.previousElementSibling.value;
+		let parten = /([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}/;
+		let s = parten.exec(email);
+		if (s == null) {
+			alert("请填写正确的邮箱")
 		}
+		console.log(s)
+		$.ajax({
+			url: "http://localhost:3000/register/auth",
+			method: "post",
+			data: {
+				email: email
+			},
+			success: function (data) {
+				console.log(data)
+			}
+
+
+		})
 	}
 	$(".download_btn").click(function () {
 		if ($(".QRcode").css("display") == "none") {

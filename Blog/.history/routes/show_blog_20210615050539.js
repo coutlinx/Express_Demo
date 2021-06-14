@@ -11,22 +11,21 @@ router.get("/:?", function (req, res, next) {
       if (err != null) {
         console.log(err);
       } else if (results[0] != undefined && results[0].article_html != null) {
-        let art = results[0];
-        let recommend = results[0].article_title
-        config.db.query("select * from essay where article_title like ?",[recommend],(err,results,fild)=>{
+        let recommend = results[0].article_title.substr(0,3)
+        config.db.query("select article_title from essay where article_title like ?",[recommend],(err,results,fild)=>{
           if(err != null){
             console.log(err)
           }else{
             console.log(results);
-            res.render("show_blog", {
-              html: art.article_html,
-              title: art.article_title,
-              auth: art.use_name,
-              icon: art.icon,
-              recommend: results
-            });
           }
         })
+        res.render("show_blog", {
+          html: results[0].article_html,
+          title: results[0].article_title,
+          auth: results[0].use_name,
+          icon: results[0].icon,
+          recommend: 
+        });
       } else {
         res.render("error/404");
       }

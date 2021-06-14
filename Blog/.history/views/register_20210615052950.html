@@ -100,32 +100,30 @@
 </script>
 <script>
 	function auth(e) {
-		if (document.getElementById("auth").style.disabled) {
+		if(document.getElementById("auth").style.disabled){
 			return;
-		} else {
-			showtime(30);
-			console.log(e.previousElementSibling.value);
-			let email = e.previousElementSibling.value;
-			let parten = /([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}/;
-			let s = parten.exec(email);
-			if (s == null) {
-				alert("请填写正确的邮箱")
-			}
-			console.log(s)
-			$.ajax({
-				url: "http://localhost:3000/register/auth",
-				method: "post",
-				data: {
-					email: email
-				},
-				success: function (data) {
-					console.log(data)
-				}
-
-
-			})
-
 		}
+		showtime(30);
+		console.log(e.previousElementSibling.value);
+		let email = e.previousElementSibling.value;
+		let parten = /([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}/;
+		let s = parten.exec(email);
+		if (s == null) {
+			alert("请填写正确的邮箱")
+		}
+		console.log(s)
+		$.ajax({
+			url: "http://localhost:3000/register/auth",
+			method: "post",
+			data: {
+				email: email
+			},
+			success: function (data) {
+				console.log(data)
+			}
+
+
+		})
 	}
 	$(".download_btn").click(function () {
 		if ($(".QRcode").css("display") == "none") {
