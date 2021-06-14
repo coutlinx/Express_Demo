@@ -8,7 +8,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/Log',(req,res) =>{
   let admin = false;
-  req.session.usename=req.body.name
   console.log(req.body);
   req.session.usename=req.body.name
   if(req.body.password==""||req.body.name==""){
@@ -24,7 +23,7 @@ router.post('/Log',(req,res) =>{
       admin = true;
     }
     if (!admin){
-      db.db.query("select use_name from user where use_name = ? and use_password = ?",[user.name,user.password],(err,results,fields) =>{
+      db.db.query("select use_name from user where use_name = ? and  use_password = ?",[user.name,user.password],(err,results,fields) =>{
         if (err!=null){
           console.log(err)
         }
