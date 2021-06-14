@@ -78,7 +78,7 @@
 
     <% for(let i of datil){
       %>
-    <div class="ui top attached teal m-opacity segment newcomment " >
+    <div class="ui top attached teal m-opacity segment " id="newcomment">
           <div class="ui padded vertical segment m-padded-tb-large">
             <div class="ui middle aligned mobile reversed stackable grid" >
               <div class="eleven wide column">
@@ -262,7 +262,7 @@
   function Newpage(){
     var before=$("#before").val();
     var next=$("#next").val();
-        $.ajax({
+    $.ajax({
                 type:"POST",
                 url:"http://localhost:3000/types/newpage",
                 data:{before:before,next:next},
@@ -325,11 +325,11 @@
                       com.push(cc);
                     }
                     console.log(com);
-          for(let i in $("newcomment")){
+          for(let i in $("segment")){
             if (com[i] != undefined){
-              $("newcomment")[i].innerHTML =com[i]
+              $("segment")[i].innerHTML =com[i]
             }else{
-              $("newcomment")[i].innerHTML = "";
+              $("segment")[i].innerHTML = "";
           }
     
           }

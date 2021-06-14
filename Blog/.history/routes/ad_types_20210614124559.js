@@ -40,7 +40,7 @@ router.post('/delet',(req,res,next)=>{
 router.post('/select',(req,res)=>{
   console.log(req.body.sortid);
   console.log(req.body.sortname);
-  db.db.query("select * from classify where id=? or sort_name=?",[req.body.sortid,req.body.sortname],(err,results)=>{
+  db.db.query("select * from classify where id=? and sort_name=?",[req.body.sortid,req.body.sortname],(err,results)=>{
     if(err!=null){
       console.log(err);
     }else{
