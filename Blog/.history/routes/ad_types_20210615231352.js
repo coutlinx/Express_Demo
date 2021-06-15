@@ -60,15 +60,15 @@ router.post('/newpage',(req,res)=>{
   console.log(req.body.buto)
   let k=0;
   let l=5;
-  if(req.body.buto =='上一页'){
-     db.db.query("select * from classify ORDER BY id LIMIT ?,?",[0,5],(err,results)=>{
+  if(buto == "上一页"){
+     db.db.query("select * from classify ORDER BY id LIMIT ?,?",[k-5,l-5],(err,results)=>{
     if(err!=null){
       console.log(err)
     }else{
       res.json({cc:results})
     }
   })
-  }else if(req.body.buto=='下一页'){
+  }else if(buto=="下一页"){
     db.db.query("select * from classify ORDER BY id LIMIT ?,?",[k+5,l+5],(err,results)=>{
       if(err!=null){
         console.log(err)

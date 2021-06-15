@@ -3,15 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>友链新增</title>
-  <link href="./images/me.jpg" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">
+  <title>分类管理</title>
+  <link href="/images/me.jpg" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
-  <link rel="stylesheet" href="./stylesheets/me.css" th:href="@{/css/me.css}">
+  <link rel="stylesheet" href="/stylesheets/me.css" th:href="@{/css/me.css}">
 </head>
 <body>
+  
 
 <!--导航栏-->
 <nav class="ui inverted gird-header" >
+  <div class="ui container">
+    <div class="ui inverted secondary stackable menu">
+      <h2 class="ui olive header item" style="font-family: STSong">管理后台</h2>
+      <a href="http://localhost:3000/admin/blogs" class="m-item item m-mobile-hide"><i class="home icon"></i>文章管理</a>
+      <a href="http://localhost:3000/admin/types" class="active m-item item m-mobile-hide"><i class="clone outline icon"></i>分类管理</a>
+      <a href="http://localhost:3000/admin/picture" class=" m-item item m-mobile-hide"><i class="image icon"></i>相册管理</a>
+      <div class="right m-item m-mobile-hide menu">
+        <div class="ui dropdown  item">
+          <div class="text">
+            <img class="ui avatar image" src="/images/me.jpg">
+            <span >oneStar</span>
+          </div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <a href="#" class="item">注销</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
     <i class="sidebar icon"></i>
   </a>
@@ -27,38 +48,46 @@
     </div>
   </div>
   </div>
-
+<br>
+<br>
+<br>
+<br>
+<br>
   <!--中间内容-->
+ 
   <div  class="m-padded-tb-big">
     <div class="ui container">
-      <!--消息提示-->
-      <div class="ui success message" >
-        <i class="close icon"></i>
-        <div class="" >提示：恭喜，操作成功！</div>
-      </div>
+      
+
+      <div  class="m-padded-tb-big">
+        <div class="ui container">
+          <div class="ui success message">
+          
+            <input type="text" name="sortid" id="sortid" placeholder="序号">
+            <input type="text" name="sortname" id="sortname" placeholder="分类名称">
+            <button type="button" id="search-btn" class="ui mini teal basic button" onclick="Select()"><i
+              class="search icon"></i>搜索</button>
+             <a href="http://localhost:3000/admin/types"><button type="button" id="search-btn" class="ui mini teal basic button" ><i
+                class="search icon"></i>清空</button> </a>
+          </div>
+
       <table class="ui compact teal table">
         <thead>
           <tr align="center">
             <th>ID</th>
-            <th>好友名称</th>
-            <th>好友备注</th>
-            <th>添加时间</th>
+            <th>名称</th>
             <th>操作</th>
           </tr>
         </thead>
         <% for (let i of datai){
           %>
         <tbody>
-
-          <tr align="center" >
-            <td><%=i.use_friends_id%></td>
-            <td><%=i.use_friends_name%></td>
-            <td><%=i.use_friends_noto%></td>
-            <td><%=i.use_add_time%></td>
-            <!--th:text="${#dates.format(message.createTime,'yyyy-MM-dd HH:mm')}"-->
+          <tr align="center"> 
+            <td id="newid" name="newid"><%=i.id%></td>
+            <td id="newsortname" name="newsortname"><%=i.sort_name%></td>
             <td>
               <a href="#" class="ui mini teal basic button compile">编辑</a>
-              <a href="#" onclick="return confirm('确定要删除该友链吗？三思啊! 删了可就没了！')" class="ui mini red basic button  delet">删除</a>
+              <a href="#" onclick="return confirm('确定要删除该分类吗？三思啊! 删了可就没了！')" class="ui mini red basic button delet" >删除</a>
             </td>
           </tr>
         </tbody>
@@ -68,27 +97,24 @@
             <th colspan="6" >
               <div class="ui inverted divided stackable grid">
                 <div class="three wide column" align="center">
-                  <a class="item" onclick="newpage(this)">上一页</a>
+                  <a class="item" onclick="newpage(i)" >上一页</a>
                 </div>
 
                 <div class="ten wide column" align="center">
                   <p>/</p>
                 </div>
+               
+
 
                 <div class="three wide column" align="center">
-                  <a class="item" onclick="newpage(this)">下一页</a>
+                  <a class="item" onclick="newpage(i)">下一页</a>
                 </div>
               </div>
-
               <div align="center">
-                <a href="http://localhost:3000/friendlinks-input">
-                  <button type="button" class="ui teal button m-mobile-wide m-margin-top"><i class="pencil icon"></i>添加好友</button>
-                </a>
-                <a href="http://localhost:3000/friends">
-                    <button type="button" class="ui teal button m-mobile-wide m-margin-top"><i class="pencil icon"></i>返回</button>
-                  </a>
+              <a href="http://localhost:3000/admin/types-input">
+                <button type="button" class="ui teal button m-mobile-wide m-margin-top"><i class="pencil icon"></i>新增</button>
+              </a>
               </div>
-
             </th>
           </tr>
         </tfoot>
@@ -96,8 +122,15 @@
     </div>
   </div>
 
+
   <br>
   <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
   <!--底部栏-->
 <footer class="ui inverted vertical segment m-padded-tb-massive m-opacity">
   <!--容器-->
@@ -116,7 +149,7 @@
           <div class="item">
             <!--微信二维码-->
             <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced " >关注公众号</div>
-            <img src="../../static/images/oneStar.jpg" th:src="@{/images/oneStar.jpg}"  class="ui m-margin-top rounded image" alt="" style="width: 110px">
+            <img src="/images/oneStar.jpg" th:src="@{/images/oneStar.jpg}"  class="ui m-margin-top rounded image" alt="" style="width: 110px">
           </div>
         </div>
       </div>
@@ -126,7 +159,7 @@
           <div class="item">
             <!--微信二维码-->
             <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced " >问题交流（QQ群）</div>
-            <img src="../../static/images/QQ-question.jpg" th:src="@{/images/QQ-question.jpg}"  class="ui m-margin-top rounded image" alt="" style="width: 110px">
+            <img src="/images/QQ-question.jpg" th:src="@{/images/QQ-question.jpg}"  class="ui m-margin-top rounded image" alt="" style="width: 110px">
           </div>
         </div>
       </div>
@@ -222,11 +255,11 @@
           .transition('fade');
       });
 
-     $(".delet").click(function(e){
+    $(".delet").click(function(e){
     let id = e.delegateTarget.parentElement.parentElement.children[0].innerHTML;
     $.ajax({
     method:"post",
-    url:"http://localhost:3000/friends-new/delet",
+    url:"http://localhost:3000/admin/types/delet",
     data:{ID:id},
     success:function(data){
       console.log(data.status);
@@ -235,35 +268,19 @@
     })
   });
 
-
-  $(".compile").click(function(e){
-    let newid   =e.delegateTarget.parentElement.parentElement.children[0].innerHTML;
-    let newname =e.delegateTarget.parentElement.parentElement.children[1].innerHTML;
-    let newnoto =e.delegateTarget.parentElement.parentElement.children[2].innerHTML;
-    let newtime =e.delegateTarget.parentElement.parentElement.children[3].innerHTML;
+  function Select(){
+    let sortname=$("#sortname").val();
+    let sortid=$("#sortid").val();
     $.ajax({
-    method:"post",
-    url:"http://localhost:3000/friends-new/insert",
-    data:{newid:newid,newnoto:newnoto},
-    success:function(data){
-      console.log(data);
-      window.location.href="http://localhost:3000/renewfriend";
-    }
-    })
-  });
-
-  function newpage(i){
-  let  buto=i.innerHTML;
-  $.ajax({
-  method:"post",
-  url:"http://localhost:3000/friends-new/newpage",
-  data:{buto:buto},
-  success:function(data){
-             console.log(data)
-          let cc=[];
-          for (let i of data.cc){
-            yy=`
-            <tbody>
+      method:"post",
+      url:"http://localhost:3000/admin/types/select",
+      data:{sortid:sortid,sortname:sortname},
+      success:function(data){
+        console.log(data.datas);
+        let inn=[]; 
+        for (let i of data.datas) {
+             nn=`
+             <tbody>
           <tr align="center"> 
             <td id="newid" name="newid">${i.id}</td>
             <td id="newsortname" name="newsortname">${i.sort_name}</td>
@@ -273,23 +290,49 @@
             </td>
           </tr>
         </tbody>
-            
-            `
-            cc.push(yy);
+             ` 
+       
+        inn.push(nn);
       } 
          for(let i in $("tbody")){
             if($("tbody")[i] == undefined){
               break;
             }
-            if(cc[i] != undefined){
-              $("tbody")[i].innerHTML = cc[i]
+            if(inn[i] != undefined){
+              $("tbody")[i].innerHTML = inn[i]
               }else{
               $("tbody")[i].innerHTML = "";
            }
           }
+      }
+    })
+  }
+
+  $(".compile").click(function(e){
+    let newid =e.delegateTarget.parentElement.parentElement.children[0].innerHTML;
+    let newname =e.delegateTarget.parentElement.parentElement.children[1].innerHTML;
+    $.ajax({
+    method:"post",
+    url:"http://localhost:3000/admin/types/insert",
+    data:{newid:newid,newname:newname},
+    success:function(data){
+      console.log(data);
+      window.location.href="http://localhost:3000/admin/types-new";
+    }
+    })
+  });
+function newpage(i){
+  let  buto=e.innerHTML;
+  $.ajax({
+  method:"post",
+  url:"http://localhost:3000/admin/types/newpage",
+  data:{buto:buto},
+  success:function(data){
+             console.log(data)
   }
   })
 }
+
   </script>
 </body>
 </html>

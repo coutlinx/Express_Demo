@@ -122,7 +122,7 @@
     <!--分页-->
     <div class="ui bottom attached segment m-opacity stackable grid">
       <div class="three wide column" align="center" >
-        <a class="item" onclick="newpage(this)" id="before">上一页</a>
+        <a class="item" onclick="Newpage()" id="before">上一页</a>
       </div>
 
       <div class="ten wide column" align="center">
@@ -130,7 +130,7 @@
       </div>
 
       <div class="three wide column" align="center" >
-        <a class="item" onclick="newpage(this)" id="next">下一页</a>
+        <a class="item" onclick="Newpage()" id="next">下一页</a>
       </div>
     </div>
 
@@ -263,7 +263,7 @@
   let  buto=i.innerHTML;
   $.ajax({
   method:"post",
-  url:"http://localhost:3000/types/newpage",
+  url:"http://localhost:3000/friends-new/newpage",
   data:{buto:buto},
   success:function(data){
              console.log(data)

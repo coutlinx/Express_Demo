@@ -59,7 +59,6 @@ router.post('/newpage',(req,res)=>{
   }
 })
 
-
 router.post('/newclassfiy',function(req,res){
   console.log(req.body.Type)
     data.db.query("select * from essay where article_classify =? " , [req.body.Type],(err,results,fields)=>{

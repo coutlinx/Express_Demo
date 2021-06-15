@@ -61,7 +61,7 @@ router.post('/newpage',(req,res)=>{
   let k=0;
   let l=5;
   if(req.body.buto =='上一页'){
-     db.db.query("select * from classify ORDER BY id LIMIT ?,?",[0,5],(err,results)=>{
+     db.db.query("select * from classify ORDER BY id LIMIT ?,?",[k-5,l-5],(err,results)=>{
     if(err!=null){
       console.log(err)
     }else{
