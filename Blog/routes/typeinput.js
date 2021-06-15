@@ -1,4 +1,4 @@
-const { select } = require('async');
+const select  = require('async');
 var express = require('express');
 var router = express.Router();
 var data=require('../config/config');

@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
       })
     }
   })
-});
+})
 
 router.post('/Class',(req,res)=>{
   config.db("select * from essay where article_classify = ? ORDER BY article_id LIMIT 0,5 ",[req.body.Type],(err,results,fild)=>{
@@ -36,7 +36,7 @@ router.post('/Class',(req,res)=>{
   })
 });
 
- router.post('/newpage',function(req,res){
+ router.post('/newpa',function(req,res){
         let i;  
         var before=req.body.before;
         var newnext=req.body.next;
