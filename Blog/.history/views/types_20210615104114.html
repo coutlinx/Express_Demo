@@ -280,7 +280,6 @@
                 success:function(yy){
                   console.log(yy.yy);
                     let  com = [];
-                    let  yue=[];
                     for (let i of yy.yy){
                        cc=`
             <div class="ui top attached teal m-opacity segment">
@@ -322,20 +321,14 @@
           </div>
         </div>   
                       `
-                  mm=`
-                        <div>
-                          <p>此分类无内容</p>
-                          </div>
-                  `;
-                     yue.push(mm);
                       com.push(cc);
                     }
                     console.log(com);
-          for(let i  =  $(".newcomment").length -1 ;i>=0;i--){
+          for(let i  =  $(".newcomment").length ;i>=0;i--){
             if (com[i] != undefined){
               $(".newcomment")[i].innerHTML =com[i]
             }else{
-              $(".newcomment")[i].innerHTML="";
+              $(".newcomment")[i].parentElement.remove($(".newcomment")[i]);
             }
           }
      }

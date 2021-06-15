@@ -322,11 +322,7 @@
           </div>
         </div>   
                       `
-                  mm=`
-                        <div>
-                          <p>此分类无内容</p>
-                          </div>
-                  `;
+                  mm=``;
                      yue.push(mm);
                       com.push(cc);
                     }
@@ -335,7 +331,7 @@
             if (com[i] != undefined){
               $(".newcomment")[i].innerHTML =com[i]
             }else{
-              $(".newcomment")[i].innerHTML="";
+              $(".newcomment")[i].innerHTML=yue[i];
             }
           }
      }

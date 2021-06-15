@@ -41,7 +41,7 @@ router.get('/',(req,res,next)=>{
                          console.log(err)
                              }else{
                            console.log(results);
-                                 res.redirect('http://localhost:3000/friends-new')
+                                 res.redirect('http://localhost:3000/admin/friendlinks')
                 }
            }) 
                             }
