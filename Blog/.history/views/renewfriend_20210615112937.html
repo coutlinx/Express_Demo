@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>友链新增</title>
-  <link href="./images/me.jpg" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">
+  <title>好友编辑</title>
+  <link href="/images/me.jpg" th:href="@{/images/me.jpg}" rel="icon" type="image/x-ico">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
-  <link rel="stylesheet" href="./stylesheets/me.css" th:href="@{/css/me.css}">
+  <link rel="stylesheet" href="/stylesheets/me.css" th:href="@{/css/me.css}">
 </head>
 <body>
 
@@ -21,81 +21,41 @@
   <div class="ui attached pointing menu">
     <div class="ui container">
       <div class="right menu">
-        <a href="#" class="item">新增</a>
-        <a href="#" class="teal active item">列表</a>
+        <a href="#" class="teal active item">新增</a>
+        <a href="#" class="item">列表</a>
       </div>
     </div>
   </div>
   </div>
 
   <!--中间内容-->
-  <div  class="m-padded-tb-big">
+  <div  class="m-container-small m-padded-tb-massive">
     <div class="ui container">
-      <!--消息提示-->
-      <div class="ui success message" >
-        <i class="close icon"></i>
-        <div class="" >提示：恭喜，操作成功！</div>
-      </div>
-      <table class="ui compact teal table">
-        <thead>
-          <tr align="center">
-            <th>ID</th>
-            <th>好友名称</th>
-            <th>好友备注</th>
-            <th>添加时间</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <% for (let i of datai){
-          %>
-        <tbody>
+      <form action="./friendlinks-input/add" method="post" class="ui form">
+        <input type="hidden" name="id">
+        <div class=" field">
+          <div class="ui left labeled input m-margin-top">
+            <label class="ui teal basic label">好友备注</label>
+            <input type="text" name="blogname" placeholder="好友备注">
+          </div>
+        </div>
+        <div class="ui error message"></div>
+        <div class="ui mini negative message">提示：不能修改重复的友链</div>
+        <div class="ui right aligned container">
+          <button type="button" class="ui button" onclick="window.history.go(-1)" >返回</button>
+          <button class="ui teal submit button">提交</button>
+        </div>
 
-          <tr align="center" >
-            <td><%=i.use_friends_id%></td>
-            <td><%=i.use_friends_name%></td>
-            <td><%=i.use_friends_noto%></td>
-            <td><%=i.use_add_time%></td>
-            <!--th:text="${#dates.format(message.createTime,'yyyy-MM-dd HH:mm')}"-->
-            <td>
-              <a href="#" class="ui mini teal basic button compile">编辑</a>
-              <a href="#" onclick="return confirm('确定要删除该友链吗？三思啊! 删了可就没了！')" class="ui mini red basic button  delet">删除</a>
-            </td>
-          </tr>
-        </tbody>
-        <%}%>
-        <tfoot>
-          <tr>
-            <th colspan="6" >
-              <div class="ui inverted divided stackable grid">
-                <div class="three wide column" align="center">
-                  <a class="item">上一页</a>
-                </div>
-
-                <div class="ten wide column" align="center">
-                  <p>/</p>
-                </div>
-
-                <div class="three wide column" align="center">
-                  <a class="item">下一页</a>
-                </div>
-              </div>
-
-              <div align="center">
-                <a href="http://localhost:3000/friendlinks-input">
-                  <button type="button" class="ui teal button m-mobile-wide m-margin-top"><i class="pencil icon"></i>添加好友</button>
-                </a>
-                <a href="http://localhost:3000/friends">
-                    <button type="button" class="ui teal button m-mobile-wide m-margin-top"><i class="pencil icon"></i>返回</button>
-                  </a>
-              </div>
-
-            </th>
-          </tr>
-        </tfoot>
-      </table>
+      </form>
     </div>
   </div>
 
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <br>
   <br>
   <!--底部栏-->
@@ -160,10 +120,13 @@
 
 </footer>
 
+
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 
+
   <script>
+
 
       // $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
 
@@ -214,43 +177,18 @@
       on : 'hover'
     });
 
-    //消息提示关闭初始化
-    $('.message .close')
-      .on('click', function () {
-        $(this)
-          .closest('.message')
-          .transition('fade');
-      });
+    $('.ui.form').form({
+      fields : {
+        title : {
+          identifier: 'namedd',
+          rules: [{
+            type : 'empty',
+            prompt: '请输入分类名称'
+          }]
+        }
+      }
+    });
 
-     $(".delet").click(function(e){
-    let id = e.delegateTarget.parentElement.parentElement.children[0].innerHTML;
-    $.ajax({
-    method:"post",
-    url:"http://localhost:3000/friends-new/delet",
-    data:{ID:id},
-    success:function(data){
-      console.log(data.status);
-      window.location.reload();
-    }
-    })
-  });
-
-
-  $(".compile").click(function(e){
-    let newid   =e.delegateTarget.parentElement.parentElement.children[0].innerHTML;
-    let newname =e.delegateTarget.parentElement.parentElement.children[1].innerHTML;
-    let newnoto =e.delegateTarget.parentElement.parentElement.children[2].innerHTML;
-    let newtime =e.delegateTarget.parentElement.parentElement.children[3].innerHTML;
-    $.ajax({
-    method:"post",
-    url:"http://localhost:3000/friends-new/insert",
-    data:{newid:newid,newnoto:newnoto},
-    success:function(data){
-      console.log(data);
-      window.location.href="http://localhost:3000/renewfriend";
-    }
-    })
-  });
   </script>
 </body>
 </html>

@@ -57,7 +57,7 @@
             <td><%=i.use_add_time%></td>
             <!--th:text="${#dates.format(message.createTime,'yyyy-MM-dd HH:mm')}"-->
             <td>
-              <a href="#" class="ui mini teal basic button compile">编辑</a>
+              <a href="#" class="ui mini teal basic button">编辑</a>
               <a href="#" onclick="return confirm('确定要删除该友链吗？三思啊! 删了可就没了！')" class="ui mini red basic button  delet">删除</a>
             </td>
           </tr>
@@ -82,11 +82,8 @@
 
               <div align="center">
                 <a href="http://localhost:3000/friendlinks-input">
-                  <button type="button" class="ui teal button m-mobile-wide m-margin-top"><i class="pencil icon"></i>添加好友</button>
+                  <button type="button" class="ui teal button m-mobile-wide m-margin-top"><i class="pencil icon"></i>新增</button>
                 </a>
-                <a href="http://localhost:3000/friends">
-                    <button type="button" class="ui teal button m-mobile-wide m-margin-top"><i class="pencil icon"></i>返回</button>
-                  </a>
               </div>
 
             </th>
@@ -237,14 +234,12 @@
 
 
   $(".compile").click(function(e){
-    let newid   =e.delegateTarget.parentElement.parentElement.children[0].innerHTML;
+    let newid =e.delegateTarget.parentElement.parentElement.children[0].innerHTML;
     let newname =e.delegateTarget.parentElement.parentElement.children[1].innerHTML;
-    let newnoto =e.delegateTarget.parentElement.parentElement.children[2].innerHTML;
-    let newtime =e.delegateTarget.parentElement.parentElement.children[3].innerHTML;
     $.ajax({
     method:"post",
     url:"http://localhost:3000/friends-new/insert",
-    data:{newid:newid,newnoto:newnoto},
+    data:{newid:newid,newname:newname},
     success:function(data){
       console.log(data);
       window.location.href="http://localhost:3000/renewfriend";

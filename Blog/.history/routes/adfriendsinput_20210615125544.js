@@ -36,22 +36,14 @@ router.get('/',(req,res,next)=>{
                                 console.log(err)
                             }else{
                                     let yue=results;
-                                    data.db.query(" select `user`.icon as icon from user where user.use_id=(SELECT use_id from user where use_name=?)",[req.body.blogname],(err,results)=>{
-                                        if(err !=null){
-                                            console.log(err)
-                                        }else{
-                                            let huang=results;
-                                            data.db.query("insert into user_friends(id,use_friends_name,use_add_time,use_id,use_friends_id,use_friends_email,use_friends_photo) value(?,?,?,?,?,?,?)",[datas[0].id+1,req.body.blogname,nowTime,m[0].use_id,yue[0].id+1,req.body.blogemail,huang[0].icon],(err,results)=>{
-                                            if(err!=null){
-                                            console.log(err)
-                                                }else{
-                                            console.log(results);
-                                                    res.redirect('http://localhost:3000/friends-new')
+                                       data.db.query("insert into user_friends(id,use_friends_name,use_add_time,use_id,use_friends_id,use_friends_email) value(?,?,?,?,?,?)",[datas[0].id+1,req.body.blogname,nowTime,m[0].use_id,yue[0].id+1,req.body.blogemail],(err,results)=>{
+                           if(err!=null){
+                         console.log(err)
+                             }else{
+                           console.log(results);
+                                 res.redirect('http://localhost:3000/friends-new')
                 }
-           })
-                                        }
-                                    })
-                                        
+           }) 
                             }
                         })
           

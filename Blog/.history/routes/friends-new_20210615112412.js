@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 
   router.post("/insert",(req,res)=>{
     req.session.newid=req.body.newid;
-    req.session.newnoto=req.body.newnoto;
+    req.session.newname=req.body.newname;
     res.json({status:"success"})
   });
 
