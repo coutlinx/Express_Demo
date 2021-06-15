@@ -2,7 +2,7 @@ var express = require('express');
 const config = require('../config/config');
 var router = express.Router();
 var db = require('../config/config');
-const { route } = require('./typenew');
+const oute  = require('./typenew');
 
 /* GET home page. */
 router.get('/', function(req,res,next){
@@ -23,6 +23,8 @@ router.get('/', function(req,res,next){
 router.post("/insert",(req,res)=>{
   req.session.newid=req.body.newid;
   req.session.newname=req.body.newname;
+  req.session.newnoto=req.body.newnoto;
+  req.session.newname=req.body.newtime;
   res.json({status:"success"})
 });
 router.post('/',(req,res)=>{
@@ -56,28 +58,26 @@ router.post('/select',(req,res)=>{
 });
 })
 router.post('/newpage',(req,res)=>{
-  let i;
+  console.log(req.body.buto)
   let k=0;
-  let j=5;
-  console.log(req.body.before)
-  if(i==req.body.before){
-     db.db.query("select * from classify ORDER BY id LIMIT ?,?",[k+5,j+5],(err,results)=>{
-    if(err !=null){
-      console.log(err);
+  let l=5;
+  if(req.body.buto =='上一页'){
+     db.db.query("select * from classify ORDER BY id LIMIT ?,?",[0,5],(err,results)=>{
+    if(err!=null){
+      console.log(err)
     }else{
-   res.json({datai:results})
+      res.json({cc:results})
     }
   })
-  }else if(i==req.body.after){
-    db.db.query("select * from classify ORDER BY id LIMIT ?,?",[k-5,j-5],(err,results)=>{
-      if(err !=null){
-        console.log(err);
+  }else if(req.body.buto=='下一页'){
+    db.db.query("select * from classify ORDER BY id LIMIT ?,?",[k+5,l+5],(err,results)=>{
+      if(err!=null){
+        console.log(err)
       }else{
-    res.json({datai:results})
+        res.json({cc:results})
       }
     })
   }
-  
 })
 
 

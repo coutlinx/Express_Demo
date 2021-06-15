@@ -1,0 +1,19 @@
+var express = require('express');
+var config = require("../config/config");
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  if (!config.HasSession(req, res)) {
+    return;
+  }else{
+    res.render('renewfriend');
+  }
+});
+
+router.post("/renew",(req,res)=>{
+    let fid=req.session.newid;
+    let 
+})
+
+module.exports = router;

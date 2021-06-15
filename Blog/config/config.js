@@ -7,7 +7,7 @@ let dbConfig = {
   port: "3306",
   user: "root",
   password: "121",
-  database: "demo",
+  database: "blog",
 };
 
 let users = {
