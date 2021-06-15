@@ -7,54 +7,52 @@ var config = require("../config/config");
 let Recommend, Status;
 
 router.get("/", function (req, res) {
-  config.IsAdmin(req,res)
-  if (!config.HasSession(req, res)) {
+  if (!config.HasSession(req, res) || config.IsAdmin(req)) {
     return;
-  }else{
-    config.getArticle((err, restults) => {
-      if (err != null) {
-        console.log(err);
-      } else {
-        console.log(restults);
+  }
+  config.getArticle((err, restults) => {
+    if (err != null) {
+      console.log(err);
+    } else {
+      console.log(restults);
+    }
+    if(restults==[]){
+      res.render("admin/blogs", {
+        name: config.users.name,
+        icon: config.users.icon,
+        article: "",
+        classify:""
+      });
+      return
+    }else{
+    for (let i = 0; i < restults.length; i++) {
+      if (restults[i].article_recommend == "true") {
+        restults[i].article_recommend = "是";
+      } else if (restults[i].article_recommend == "false") {
+        restults[i].article_recommend = "否";
       }
-      if(restults==[]){
-        res.render("admin/blogs", {
+      if (restults[i].article_status == "draft") {
+        restults[i].article_status = "草稿";
+      } else if (restults[i].article_status == "article") {
+        restults[i].article_status = "成品";
+      }
+    }
+       config.article = restults;
+    config.db.query("select id,sort_name from classify",(err,restult,fild)=>{
+      if  (err !=null){
+        console.log(err);
+      }else{
+        console.log(restult)
+    res.render("admin/blogs", {
           name: config.users.name,
           icon: config.users.icon,
-          article: "",
-          classify:""
+          article: config.article,
+          classify:restult,
         });
-        return
-      }else{
-      for (let i = 0; i < restults.length; i++) {
-        if (restults[i].article_recommend == "true") {
-          restults[i].article_recommend = "是";
-        } else if (restults[i].article_recommend == "false") {
-          restults[i].article_recommend = "否";
-        }
-        if (restults[i].article_status == "draft") {
-          restults[i].article_status = "草稿";
-        } else if (restults[i].article_status == "article") {
-          restults[i].article_status = "成品";
-        }
       }
-         config.article = restults;
-      config.db.query("select id,sort_name from classify",(err,restult,fild)=>{
-        if  (err !=null){
-          console.log(err);
-        }else{
-          console.log(restult)
-      res.render("admin/blogs", {
-            name: config.users.name,
-            icon: config.users.icon,
-            article: config.article,
-            classify:restult,
-          });
-        }
-      })
-      }
-    });
-  }
+    })
+    }
+  });
 });
 
 router.post("/delet", (req, res) => {

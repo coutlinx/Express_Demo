@@ -122,18 +122,17 @@ function HasSession(req, res) {
 function IsAdmin(req,res){
   if(req.session.user == undefined){
     return res.redirect("/")
-  }else{
-    db.query("select * from tab_admin where admin_name =?",[req.session.user.name],(err,results,fild)=>{
-      if(err!= null){
-        console.log(err)
-      }else{
-        console.log(results);
-        if(results.length == 0){
-          return res.redirect("http://localhost:3000/login");
-        }
-      }
-    })
   }
+  db.query("select * from tab_admin where admin_name =?",[req.session.user.name],(err,results,fild)=>{
+    if(err!= null){
+      console.log(err)
+    }else{
+      console.log(results);
+      if(results.length == 0){
+        return res.redirect("/");
+      }
+    }
+  })
 }
 function DeletArticle(id,callback){
   db.query("DELETE FROM `essay` WHERE article_id = ?",[id],(err,result,fields)=>{

@@ -6,8 +6,7 @@ var db=require('../config/config');
 router.get('/', function(req, res, next) {
   var datail,datas;
   console.log(req.session.usename);
-  config.IsAdmin(req,res)
-  if(req.session.usename==undefined ){
+  if(req.session.usename==undefined || config.IsAdmin(req)){
      res.redirect('login')
   }else{
     db.db.query("select * from user_friends as u where u.use_id=(select user.use_id from user where use_name=?) ORDER BY use_id LIMIT 0,5",[req.session.usename],(err,results)=>{

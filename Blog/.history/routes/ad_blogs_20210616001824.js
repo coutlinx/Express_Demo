@@ -7,8 +7,7 @@ var config = require("../config/config");
 let Recommend, Status;
 
 router.get("/", function (req, res) {
-  config.IsAdmin(req,res)
-  if (!config.HasSession(req, res)) {
+  if (!config.HasSession(req, res) || config.IsAdmin(req)) {
     return;
   }else{
     config.getArticle((err, restults) => {

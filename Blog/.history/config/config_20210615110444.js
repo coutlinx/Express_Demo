@@ -1,4 +1,3 @@
-const { nextTick } = require("async");
 var mysql = require("mysql");
 var nodemail = require("nodemailer");
 
@@ -108,7 +107,6 @@ function getArticle(callback) {
     }
   );
 }
-
 function HasSession(req, res) {
   if (req.session.user == undefined) {
     res.send(
@@ -117,22 +115,6 @@ function HasSession(req, res) {
     return false;
   } else {
     return true;
-  }
-}
-function IsAdmin(req,res){
-  if(req.session.user == undefined){
-    return res.redirect("/")
-  }else{
-    db.query("select * from tab_admin where admin_name =?",[req.session.user.name],(err,results,fild)=>{
-      if(err!= null){
-        console.log(err)
-      }else{
-        console.log(results);
-        if(results.length == 0){
-          return res.redirect("http://localhost:3000/login");
-        }
-      }
-    })
   }
 }
 function DeletArticle(id,callback){
@@ -154,5 +136,4 @@ module.exports = {
   HasSession,
   article: article,
   DeletArticle,
-  IsAdmin
 };

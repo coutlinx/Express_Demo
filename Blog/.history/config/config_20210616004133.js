@@ -129,7 +129,7 @@ function IsAdmin(req,res){
       }else{
         console.log(results);
         if(results.length == 0){
-          return res.redirect("http://localhost:3000/login");
+          return res.redirect("/");
         }
       }
     })

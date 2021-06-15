@@ -4,8 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  config.IsAdmin(req,res);
-  if(!config.HasSession(req,res)){
+  if(!config.HasSession(req,res) || config.IsAdmin(req)){
     return;
   }else{
     res.render('admin/pictures');

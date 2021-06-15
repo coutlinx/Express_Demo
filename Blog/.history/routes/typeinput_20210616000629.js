@@ -6,9 +6,11 @@ var data=require('../config/config');
 
 router.get('/',(req,res,next)=>{
     config.HasSession(req,res);
-    config.IsAdmin(req,res);   
+    if(config.IsAdmin(req)){
+        return;
+    }else{
         res.render('admin/types-input')
-    
+    }
 })
  router.post('/add',(req,res,next)=>{
      data.db.query("select max(id) as id from classify",(err,results)=>{

@@ -2,6 +2,7 @@ var express = require("express");
 var db = require("../config/config");
 var router = express.Router();
 router.get("/", function (req, res, next) {
+  db.IsAdmin(req,res)
   if (req.session.user == undefined) {
     return res.redirect("/login");
   } else {

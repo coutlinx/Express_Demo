@@ -6,7 +6,7 @@ var db=require('../config/config');
 router.get('/', function(req, res, next) {
   var datail,datas;
   console.log(req.session.usename);
-  config.IsAdmin(req,res)
+  config.IsAdmin(req)
   if(req.session.usename==undefined ){
      res.redirect('login')
   }else{

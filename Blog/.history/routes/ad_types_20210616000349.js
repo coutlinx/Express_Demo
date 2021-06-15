@@ -6,8 +6,7 @@ const { route } = require('./typenew');
 
 /* GET home page. */
 router.get('/', function(req,res,next){
-  config.IsAdmin(req,res)
-  if(!config.HasSession(req,res)){
+  if(!config.HasSession(req,res)  || config.IsAdmin(req)){
     return;
   }else{
     db.db.query("select * from classify ORDER BY id LIMIT 0,5",(err,results)=>{

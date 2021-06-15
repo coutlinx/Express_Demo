@@ -7,7 +7,7 @@ var config = require("../config/config");
 let Recommend, Status;
 
 router.get("/", function (req, res) {
-  config.IsAdmin(req,res)
+  config.IsAdmin(req)
   if (!config.HasSession(req, res)) {
     return;
   }else{

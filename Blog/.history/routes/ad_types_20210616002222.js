@@ -6,7 +6,7 @@ const { route } = require('./typenew');
 
 /* GET home page. */
 router.get('/', function(req,res,next){
-  config.IsAdmin(req,res)
+  config.IsAdmin(req)
   if(!config.HasSession(req,res)){
     return;
   }else{

@@ -7,9 +7,11 @@ var session = require('express-session');
 /* GET home page. */
 router.get('/', function(req,res,next) {
   data.HasSession(req,res);
-  data.IsAdmin(req,res)
+  if(data.IsAdmin(req)){
+    return;
+}else{
    res.render('admin/types-new');
-
+}
 });
  
 router.post('/compile',(req,res,next)=>{

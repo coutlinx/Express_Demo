@@ -6,7 +6,7 @@ var data=require('../config/config');
 
 router.get('/',(req,res,next)=>{
     config.HasSession(req,res);
-    config.IsAdmin(req,res);   
+    (config.IsAdmin(req,res));   
         res.render('admin/types-input')
     
 })

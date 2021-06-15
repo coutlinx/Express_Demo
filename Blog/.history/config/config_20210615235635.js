@@ -1,4 +1,3 @@
-const { nextTick } = require("async");
 var mysql = require("mysql");
 var nodemail = require("nodemailer");
 
@@ -120,20 +119,17 @@ function HasSession(req, res) {
   }
 }
 function IsAdmin(req,res){
-  if(req.session.user == undefined){
-    return res.redirect("/")
-  }else{
-    db.query("select * from tab_admin where admin_name =?",[req.session.user.name],(err,results,fild)=>{
-      if(err!= null){
-        console.log(err)
+  db.query("select * from tab_admin where admin_name =?",[req.session.user.name],(err,results,fild)=>{
+    if(err!= null){
+      console.log(err)
+    }else{
+      if(results[0].length == 0){
+        return false;
       }else{
-        console.log(results);
-        if(results.length == 0){
-          return res.redirect("http://localhost:3000/login");
-        }
+        return true;
       }
-    })
-  }
+    }
+  })
 }
 function DeletArticle(id,callback){
   db.query("DELETE FROM `essay` WHERE article_id = ?",[id],(err,result,fields)=>{
@@ -154,5 +150,4 @@ module.exports = {
   HasSession,
   article: article,
   DeletArticle,
-  IsAdmin
 };

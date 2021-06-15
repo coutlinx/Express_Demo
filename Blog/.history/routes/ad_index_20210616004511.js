@@ -1,4 +1,5 @@
 var express = require("express");
+const config = require("../config/config");
 var db = require("../config/config");
 var router = express.Router();
 router.get("/", function (req, res, next) {

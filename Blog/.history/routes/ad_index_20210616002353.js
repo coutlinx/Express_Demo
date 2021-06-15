@@ -1,9 +1,11 @@
 var express = require("express");
+const config = require("../config/config");
 var db = require("../config/config");
 var router = express.Router();
 router.get("/", function (req, res, next) {
+  config.IsAdmin(req,res)
   if (req.session.user == undefined) {
-    return res.redirect("/login");
+    res.redirect("/login");
   } else {
     db.db.query(
       "select admin_id from tab_admin where admin_name  = ? and admin_password = ?",
@@ -27,14 +29,14 @@ router.get("/", function (req, res, next) {
             config.users.pass=req.session.user.password;
             config.users.icon=icon;
             console.log(config.users);
-            return res.render("admin/index", {
+            res.render("admin/index", {
               name: config.users.name,
               icon: config.users.icon
             });
          })
-          
+          return;
         } else {
-          return res.send(
+          res.send(
             "<h1>您不是管理员,请点击旁边按钮跳转到登录界面</h1><a href='http://localhost:3000/login'>登录</a>"
           );
         }
